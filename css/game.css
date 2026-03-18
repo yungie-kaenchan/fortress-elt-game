@@ -688,7 +688,7 @@ input[type="text"]::placeholder {
     flex: 1;
     max-width: 900px;
     margin: 0 auto;
-    padding: 100px 1.5rem 2rem;
+    padding: 100px 1.5rem 80px;
     width: 100%;
 }
 
@@ -866,6 +866,7 @@ input[type="text"]::placeholder {
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
+    margin-bottom: 30px;
 }
 
 .option-btn {
@@ -1943,18 +1944,19 @@ input[type="text"]::placeholder {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(15, 15, 26, 0.95), rgba(15, 15, 26, 0.8));
-    backdrop-filter: blur(10px);
-    padding: 0.75rem 1.5rem;
+    background: rgba(15, 15, 26, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 0.35rem 1rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--color-text-dim);
     z-index: 100;
     border-top: 1px solid rgba(139, 92, 246, 0.2);
+    line-height: 1.4;
 }
 
 .game-footer p {
-    margin: 0.25rem 0;
+    margin: 0;
 }
 
 .game-footer strong {
@@ -1962,15 +1964,13 @@ input[type="text"]::placeholder {
 }
 
 .cc-notice {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
+    display: inline;
+    font-size: inherit;
 }
 
 .cc-icon {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    vertical-align: middle;
 }
 
 .cc-notice a {
@@ -1985,25 +1985,17 @@ input[type="text"]::placeholder {
 /* Adjust screen padding to account for footer */
 .screen-center,
 .screen-scroll {
-    padding-bottom: 100px;
+    padding-bottom: 70px;
 }
 
 /* Extra space for button groups at bottom of screens */
 .button-group {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
-/* Specific screen adjustments for footer clearance */
-#home-screen .screen-center,
-#setup-screen .screen-scroll,
-#character-screen .screen-scroll,
-#instructions-screen .screen-scroll,
-#level-screen .screen-scroll,
-#passcode-screen .screen-center,
-#feedback-screen .screen-center,
-#victory-screen .screen-center,
-#gameover-screen .screen-center {
-    padding-bottom: 110px;
+/* Level screen needs extra padding for answer options */
+#level-screen .level-container {
+    padding-bottom: 90px;
 }
 
 /* ============================================
@@ -2058,14 +2050,22 @@ input[type="text"]::placeholder {
     }
     
     .game-footer {
-        padding: 0.5rem 1rem;
-        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.55rem;
+    }
+    
+    .cc-icon {
+        font-size: 0.65rem;
     }
     
     /* Mobile: extra padding for footer clearance */
     .screen-center,
     .screen-scroll {
-        padding-bottom: 120px;
+        padding-bottom: 60px;
+    }
+    
+    .level-container {
+        padding-bottom: 80px !important;
     }
     
     .analytics-grid {

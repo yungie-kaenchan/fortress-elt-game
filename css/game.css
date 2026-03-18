@@ -984,6 +984,50 @@ input[type="text"]::placeholder {
     flex-wrap: wrap;
 }
 
+/* Navigation row at TOP of question area */
+.nav-row-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(139, 92, 246, 0.15);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* Larger navigation buttons */
+.btn-nav {
+    padding: 1rem 2rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    min-width: 180px;
+}
+
+.btn-nav:not(:disabled) {
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4); }
+    50% { box-shadow: 0 5px 30px rgba(139, 92, 246, 0.7); }
+}
+
+/* Submit button - extra prominent */
+.btn-submit-main {
+    padding: 1.1rem 2.5rem;
+    font-size: 1.25rem;
+    min-width: 220px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    animation: pulseSuccess 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseSuccess {
+    0%, 100% { box-shadow: 0 5px 20px rgba(34, 197, 94, 0.5); }
+    50% { box-shadow: 0 8px 35px rgba(34, 197, 94, 0.8); }
+}
+
 /* ============================================
    PASSCODE SCREEN
    ============================================ */
@@ -1946,39 +1990,29 @@ input[type="text"]::placeholder {
     right: 0;
     background: rgba(15, 15, 26, 0.95);
     backdrop-filter: blur(8px);
-    padding: 0.35rem 1rem;
+    padding: 0.5rem 1rem;
     text-align: center;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: var(--color-text-dim);
     z-index: 100;
     border-top: 1px solid rgba(139, 92, 246, 0.2);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 .game-footer p {
-    margin: 0;
+    margin: 0.15rem 0;
 }
 
 .game-footer strong {
     color: var(--color-primary-light);
 }
 
-.cc-notice {
-    display: inline;
-    font-size: inherit;
-}
-
-.cc-icon {
-    font-size: 0.8rem;
-    vertical-align: middle;
-}
-
-.cc-notice a {
+.game-footer a {
     color: var(--color-info);
     text-decoration: none;
 }
 
-.cc-notice a:hover {
+.game-footer a:hover {
     text-decoration: underline;
 }
 
@@ -2050,22 +2084,29 @@ input[type="text"]::placeholder {
     }
     
     .game-footer {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.55rem;
+        padding: 0.4rem 0.5rem;
+        font-size: 0.65rem;
     }
     
-    .cc-icon {
-        font-size: 0.65rem;
+    /* Mobile: navigation buttons */
+    .nav-row-top {
+        flex-direction: column;
+        padding: 0.75rem;
+    }
+    
+    .btn-nav {
+        min-width: 160px;
+        font-size: 1rem;
     }
     
     /* Mobile: extra padding for footer clearance */
     .screen-center,
     .screen-scroll {
-        padding-bottom: 60px;
+        padding-bottom: 70px;
     }
     
     .level-container {
-        padding-bottom: 80px !important;
+        padding-bottom: 70px !important;
     }
     
     .analytics-grid {

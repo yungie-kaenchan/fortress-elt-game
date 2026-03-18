@@ -202,6 +202,7 @@ const soundEngine = {
     
     setVolume(value) {
         this.volume = value / 100;
+        this.init(); // Ensure bgMusic reference is set
         if (this.bgMusic) {
             this.bgMusic.volume = this.volume;
         }
@@ -257,6 +258,7 @@ function adjustVolume(value) {
 // ============================================
 document.addEventListener('DOMContentLoaded', () => {
     initFrameworkPanel();
+    soundEngine.init(); // Initialize audio system
     
     // Loading animation
     setTimeout(() => {
@@ -428,6 +430,17 @@ function startGame() {
     }
     
     soundEngine.play('success');
+    
+    // Start background music on first user interaction
+    if (!soundEngine.musicPlaying && soundEngine.volume > 0) {
+        soundEngine.init();
+        if (soundEngine.bgMusic) {
+            soundEngine.bgMusic.volume = soundEngine.volume;
+            soundEngine.bgMusic.play().catch(e => console.log('Music autoplay blocked:', e));
+            soundEngine.musicPlaying = true;
+        }
+    }
+    
     showScreen('instructions');
 }
 

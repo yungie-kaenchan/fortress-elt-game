@@ -1985,7 +1985,25 @@ input[type="text"]::placeholder {
 /* Adjust screen padding to account for footer */
 .screen-center,
 .screen-scroll {
-    padding-bottom: 80px;
+    padding-bottom: 100px;
+}
+
+/* Extra space for button groups at bottom of screens */
+.button-group {
+    margin-bottom: 20px;
+}
+
+/* Specific screen adjustments for footer clearance */
+#home-screen .screen-center,
+#setup-screen .screen-scroll,
+#character-screen .screen-scroll,
+#instructions-screen .screen-scroll,
+#level-screen .screen-scroll,
+#passcode-screen .screen-center,
+#feedback-screen .screen-center,
+#victory-screen .screen-center,
+#gameover-screen .screen-center {
+    padding-bottom: 110px;
 }
 
 /* ============================================
@@ -2042,6 +2060,12 @@ input[type="text"]::placeholder {
     .game-footer {
         padding: 0.5rem 1rem;
         font-size: 0.7rem;
+    }
+    
+    /* Mobile: extra padding for footer clearance */
+    .screen-center,
+    .screen-scroll {
+        padding-bottom: 120px;
     }
     
     .analytics-grid {

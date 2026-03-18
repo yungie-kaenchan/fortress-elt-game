@@ -1692,7 +1692,7 @@ input[type="text"]::placeholder {
 }
 
 /* Admin Panel Styles */
-#admin-panel {
+#admin-panel-screen {
     background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
 }
 

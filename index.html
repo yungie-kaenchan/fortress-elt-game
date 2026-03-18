@@ -155,6 +155,19 @@
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
             
+            <!-- Navigation Buttons - MOVED TO TOP -->
+            <div class="nav-row nav-row-top">
+                <button id="btn-prev" class="btn btn-secondary btn-nav" onclick="prevQuestion()" style="visibility: hidden;">
+                    ← Previous
+                </button>
+                <button id="btn-next" class="btn btn-primary btn-nav" onclick="nextQuestion()" disabled>
+                    Next Question →
+                </button>
+                <button id="btn-submit" class="btn btn-success btn-nav btn-submit-main" onclick="submitLevel()" style="display: none;">
+                    ✓ Submit All Answers
+                </button>
+            </div>
+            
             <!-- Aids -->
             <div class="aids-row" id="aids-row">
                 <!-- Populated by JavaScript -->
@@ -163,19 +176,6 @@
             <!-- Question Area -->
             <div class="question-area" id="question-area">
                 <!-- Populated by JavaScript -->
-            </div>
-            
-            <!-- Navigation -->
-            <div class="nav-row">
-                <button id="btn-prev" class="btn btn-secondary" onclick="prevQuestion()" style="visibility: hidden;">
-                    ← Previous
-                </button>
-                <button id="btn-next" class="btn btn-primary" onclick="nextQuestion()" disabled>
-                    Next →
-                </button>
-                <button id="btn-submit" class="btn btn-success" onclick="submitLevel()" style="display: none;">
-                    Submit Answers ✓
-                </button>
             </div>
         </div>
     </div>
@@ -432,7 +432,8 @@
     <!-- FOOTER -->
     <!-- ============================================ -->
     <footer class="game-footer">
-        <p>Created by <strong>Dr. Payungsak Kaenchan, EdD</strong> | Mahidol University | <span class="cc-notice"><span class="cc-icon">🅭🅯</span> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></p>
+        <p>Designed and created by <strong>Dr. Payungsak Kaenchan, EdD</strong> | Faculty of Liberal Arts, Mahidol University</p>
+        <p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-NC-SA 4.0</a>.</p>
     </footer>
     
     <!-- Scripts -->

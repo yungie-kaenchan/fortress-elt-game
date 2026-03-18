@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Fortress of Ed Tech Frameworks</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Single Combined Stylesheet -->
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body>
+    <!-- Background Music Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="assets/audio/adventure-music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- ============================================ -->
+    <!-- LOADING SCREEN -->
+    <!-- ============================================ -->
+    <div id="loading-screen" class="screen active">
+        <div class="screen-center">
+            <div class="fortress-icon animate-float">🏰</div>
+            <h1 class="game-title">The Fortress of Ed Tech Frameworks</h1>
+            <p class="game-subtitle">Master the Five Chambers of Pedagogical Wisdom</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Preparing your adventure...</p>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- HOME SCREEN -->
+    <!-- ============================================ -->
+    <div id="home-screen" class="screen">
+        <div class="screen-center">
+            <div class="fortress-icon animate-float">🏰</div>
+            <h1 class="game-title">The Fortress of Ed Tech Frameworks</h1>
+            <p class="game-subtitle">Master the Five Chambers of Pedagogical Wisdom</p>
+            
+            <div class="card team-form">
+                <h2>⚔️ Register Your Quest Party</h2>
+                
+                <div class="form-group">
+                    <label for="teamName">Team Name</label>
+                    <input type="text" id="teamName" placeholder="Enter your team name" maxlength="30">
+                </div>
+                
+                <div class="form-group">
+                    <label>Team Members (1-4 warriors)</label>
+                    <div class="members-grid">
+                        <input type="text" id="member1" placeholder="Member 1 (required)" maxlength="20">
+                        <input type="text" id="member2" placeholder="Member 2 (optional)" maxlength="20">
+                        <input type="text" id="member3" placeholder="Member 3 (optional)" maxlength="20">
+                        <input type="text" id="member4" placeholder="Member 4 (optional)" maxlength="20">
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-block" onclick="startGame()">
+                    View Instructions →
+                </button>
+            </div>
+            
+            <button class="btn btn-secondary" onclick="viewLeaderboard()">
+                🏆 View Leaderboard
+            </button>
+            
+            <!-- Admin Login Link -->
+            <div class="admin-login-link">
+                <button class="btn-text-link" onclick="showAdminLogin()">🔐 Fortress Keeper</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- INSTRUCTIONS SCREEN -->
+    <!-- ============================================ -->
+    <div id="instructions-screen" class="screen">
+        <div class="screen-scroll">
+            <h2 class="screen-title">📜 The Quest Awaits</h2>
+            
+            <div class="card">
+                <h3>⚔️ Your Mission</h3>
+                <p>Navigate through 5 chambers, each testing your knowledge of pedagogical frameworks. Answer ALL questions correctly in each chamber to unlock the next!</p>
+            </div>
+            
+            <div class="card">
+                <h3>❤️ Life Powers</h3>
+                <p>Each warrior has <strong>2 Life Powers</strong>. Your team starts with up to <strong>8 total lives</strong>. Wrong answers at the passcode gate cost 1 life. If all lives are lost, your quest ends!</p>
+            </div>
+            
+            <div class="card">
+                <h3>🛡️ Chamber Aids (3 per level)</h3>
+                <ul class="aids-list">
+                    <li>🎯 <strong>50/50</strong> — Removes 2 wrong answers</li>
+                    <li>📖 <strong>Framework Reference</strong> — View framework details</li>
+                    <li>💡 <strong>Hint</strong> — Get a guiding clue for the level</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3>🔑 Passcode Gates</h3>
+                <p>After answering 5 questions, enter the passcode from your facilitator. <strong>ALL 5 answers must be correct</strong> to pass!</p>
+            </div>
+            
+            <div class="card">
+                <h3>🏆 Victory</h3>
+                <p>Complete all 5 chambers to escape the fortress and earn your Framework Master certificate!</p>
+            </div>
+            
+            <button class="btn btn-primary btn-large" onclick="showCharacterSelection()">
+                ⚔️ Choose Your Warriors!
+            </button>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- CHARACTER SELECTION SCREEN -->
+    <!-- ============================================ -->
+    <div id="character-screen" class="screen">
+        <div class="screen-scroll">
+            <h2 class="screen-title">⚔️ Choose Your Warriors</h2>
+            <p class="screen-subtitle">Each warrior has <strong>2 Life Powers</strong></p>
+            <p class="life-total-display">Total Team Lives: <span id="total-lives-display">0</span></p>
+            
+            <div id="character-selection-area">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <button id="btn-start-adventure" class="btn btn-primary btn-large" onclick="startAdventure()" disabled>
+                🏰 Enter the Fortress!
+            </button>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- LEVEL SCREEN -->
+    <!-- ============================================ -->
+    <div id="level-screen" class="screen">
+        <div class="level-container">
+            <!-- Level Header -->
+            <div class="level-header">
+                <div class="level-badge" id="level-badge">Chamber 1</div>
+                <div class="level-title" id="level-title">Framework Identification</div>
+                <div class="question-counter" id="question-counter">Question 1 of 5</div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            
+            <!-- Aids -->
+            <div class="aids-row" id="aids-row">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <!-- Question Area -->
+            <div class="question-area" id="question-area">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <!-- Navigation -->
+            <div class="nav-row">
+                <button id="btn-prev" class="btn btn-secondary" onclick="prevQuestion()" style="visibility: hidden;">
+                    ← Previous
+                </button>
+                <button id="btn-next" class="btn btn-primary" onclick="nextQuestion()" disabled>
+                    Next →
+                </button>
+                <button id="btn-submit" class="btn btn-success" onclick="submitLevel()" style="display: none;">
+                    Submit Answers ✓
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- PASSCODE SCREEN -->
+    <!-- ============================================ -->
+    <div id="passcode-screen" class="screen">
+        <div class="screen-scroll">
+            <div class="key-icon">
+                <img src="assets/images/key-chamber.png" alt="Key Chamber" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <span style="display:none;">🔐</span>
+            </div>
+            <h2 class="screen-title">The Chamber Gate</h2>
+            <p>Review your answers and enter the sacred passcode.</p>
+            
+            <div class="card answers-summary" id="answers-summary">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <div class="passcode-input-area">
+                <label for="passcode-input">Enter 5-Digit Passcode:</label>
+                <input type="password" id="passcode-input" maxlength="5" placeholder="•••••" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
+                <button class="btn btn-primary" onclick="checkPasscode()">🔓 Unlock</button>
+            </div>
+            
+            <div id="passcode-error" class="error-box" style="display: none;"></div>
+            
+            <button class="btn btn-secondary" onclick="goBackToLevel()">
+                ← Review Answers
+            </button>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- FEEDBACK REVIEW SCREEN -->
+    <!-- ============================================ -->
+    <div id="feedback-screen" class="screen">
+        <div class="screen-scroll" id="feedback-content">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- VICTORY SCREEN -->
+    <!-- ============================================ -->
+    <div id="victory-screen" class="screen">
+        <div class="screen-center">
+            <div class="victory-crown">
+                <img src="assets/images/crown-gold.png" alt="Victory Crown" onerror="this.classList.add('hidden');">
+                <span class="emoji-fallback">👑</span>
+            </div>
+            <h1 class="victory-title">VICTORY!</h1>
+            <h2>The Fortress of Ed Tech Frameworks Has Fallen!</h2>
+            
+            <div class="card victory-stats">
+                <p>Congratulations, <strong id="victory-team-name"></strong>!</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="victory-time">0:00</div>
+                        <div class="stat-label">Total Time</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="victory-lives">0</div>
+                        <div class="stat-label">Lives Remaining</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="victory-characters" id="victory-characters">
+                <!-- Populated by JavaScript -->
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="downloadCertificate()">📜 Download Certificate</button>
+                <button class="btn btn-secondary" onclick="viewLeaderboard()">🏆 View Leaderboard</button>
+                <button class="btn btn-secondary" onclick="restartGame()">🔄 Play Again</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- GAME OVER SCREEN -->
+    <!-- ============================================ -->
+    <div id="gameover-screen" class="screen">
+        <div class="screen-center gameover-content">
+            <div class="gameover-icon">💀</div>
+            <h1 class="gameover-title">GAME OVER</h1>
+            <p>Your team has lost all Life Powers!</p>
+            <p>The Framework Fortress remains unconquered... for now.</p>
+            
+            <div class="card gameover-stats">
+                <p>Reached: Level <span id="gameover-level">1</span></p>
+                <p>Total Attempts: <span id="gameover-attempts">0</span></p>
+            </div>
+            
+            <button class="btn btn-primary btn-large" onclick="restartGame()">
+                🔄 Try Again
+            </button>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- LEADERBOARD MODAL -->
+    <!-- ============================================ -->
+    <div id="leaderboard-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🏆 Hall of Framework Masters</h2>
+                <button class="modal-close" onclick="closeLeaderboard()">✕</button>
+            </div>
+            <div class="modal-body" id="leaderboard-body">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- FRAMEWORK REFERENCE PANEL -->
+    <!-- ============================================ -->
+    <div id="framework-panel" class="side-panel">
+        <div class="panel-header">
+            <h3>📖 Framework Reference</h3>
+            <button class="panel-close" onclick="closeFrameworkPanel()">✕</button>
+        </div>
+        <div class="panel-tabs" id="framework-tabs">
+            <!-- Populated by JavaScript -->
+        </div>
+        <div class="panel-content" id="framework-content">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- HINT MODAL -->
+    <!-- ============================================ -->
+    <div id="hint-modal" class="modal">
+        <div class="modal-content hint-modal-content">
+            <div class="hint-icon">💡</div>
+            <h3 id="hint-title">Level Hint</h3>
+            <p id="hint-text"></p>
+            <button class="btn btn-primary" onclick="closeHintModal()">Got it!</button>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- CHARACTER DASHBOARD (Fixed Position) -->
+    <!-- ============================================ -->
+    <div id="character-dashboard" class="dashboard">
+        <!-- Populated by JavaScript -->
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- SOUND CONTROLS (Draggable Volume Slider) -->
+    <!-- ============================================ -->
+    <div class="sound-controls" id="sound-controls">
+        <div class="volume-control">
+            <span class="volume-icon" id="volume-icon">🔊</span>
+            <input type="range" id="volume-slider" min="0" max="100" value="30" 
+                   oninput="adjustVolume(this.value)" title="Drag to adjust volume">
+            <span class="volume-value" id="volume-value">30%</span>
+        </div>
+        <button id="btn-sfx" class="sound-btn active" onclick="toggleSFX()" title="Toggle Sound Effects">
+            🔔
+        </button>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- FIREWORKS CONTAINER -->
+    <!-- ============================================ -->
+    <div id="fireworks-container" class="fireworks-container"></div>
+    
+    <!-- ============================================ -->
+    <!-- CONFETTI CONTAINER -->
+    <!-- ============================================ -->
+    <div id="confetti-container" class="confetti-container"></div>
+    
+    <!-- ============================================ -->
+    <!-- ADMIN LOGIN MODAL -->
+    <!-- ============================================ -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content admin-login-modal">
+            <div class="modal-header">
+                <h2>🔐 Fortress Keeper Login</h2>
+                <button class="modal-close" onclick="closeAdminLogin()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" placeholder="Enter username" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter password" autocomplete="off">
+                </div>
+                <div id="admin-login-error" class="error-text" style="display: none;"></div>
+                <button class="btn btn-primary btn-block" onclick="adminLogin()">🏰 Enter Fortress Keeper</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- ADMIN PANEL (Fortress Keeper) -->
+    <!-- ============================================ -->
+    <div id="admin-panel" class="screen">
+        <div class="screen-scroll admin-panel-content">
+            <div class="admin-header">
+                <h1>🏰 Fortress Keeper</h1>
+                <p>Admin Dashboard</p>
+                <button class="btn btn-secondary" onclick="logoutAdmin()">🚪 Logout</button>
+            </div>
+            
+            <!-- Analytics Section -->
+            <div class="card admin-section">
+                <h3>📊 Analytics Overview</h3>
+                <div class="analytics-grid" id="analytics-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Active Teams Section -->
+            <div class="card admin-section">
+                <h3>🎮 Team Progress</h3>
+                <div id="team-progress-table">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Leaderboard Management -->
+            <div class="card admin-section">
+                <h3>🏆 Leaderboard Management</h3>
+                <div id="admin-leaderboard">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="admin-actions">
+                    <button class="btn btn-danger" onclick="confirmResetLeaderboard()">🗑️ Reset All Scores</button>
+                    <button class="btn btn-primary" onclick="exportScores()">📥 Export Report (CSV)</button>
+                </div>
+            </div>
+            
+            <!-- Reset Confirmation -->
+            <div id="reset-confirm" class="reset-confirm" style="display: none;">
+                <p>⚠️ Are you sure you want to delete ALL leaderboard data?</p>
+                <p class="warning-text">This action cannot be undone!</p>
+                <div class="button-group">
+                    <button class="btn btn-danger" onclick="resetLeaderboard()">Yes, Delete All</button>
+                    <button class="btn btn-secondary" onclick="cancelReset()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <footer class="game-footer">
+        <p>Created by <strong>Dr. Payungsak Kaenchan, EdD</strong> | Faculty of Liberal Arts, Mahidol University</p>
+        <p class="cc-notice">
+            <span class="cc-icon">🅭🅯</span> 
+            This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-NC-SA 4.0</a>
+        </p>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/questions.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

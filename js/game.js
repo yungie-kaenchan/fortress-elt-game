@@ -441,6 +441,94 @@ function startGame() {
         }
     }
     
+    showScreen('intro-video');
+    initIntroVideo();
+}
+
+// ============================================
+// INTRO VIDEO PLAYER
+// ============================================
+function initIntroVideo() {
+    const video = document.getElementById('intro-video');
+    const overlay = document.getElementById('video-overlay');
+    
+    if (!video) return;
+    
+    // Reset video to beginning
+    video.currentTime = 0;
+    
+    // Show overlay initially
+    if (overlay) {
+        overlay.classList.remove('hidden');
+    }
+    
+    // Handle video events
+    video.addEventListener('play', () => {
+        if (overlay) overlay.classList.add('hidden');
+    });
+    
+    video.addEventListener('pause', () => {
+        if (video.currentTime > 0 && video.currentTime < video.duration) {
+            // Paused mid-video - keep overlay hidden
+        }
+    });
+    
+    video.addEventListener('ended', () => {
+        // Video finished - show continue prompt
+        soundEngine.play('success');
+    });
+    
+    // Check if video file exists
+    video.addEventListener('error', () => {
+        console.log('Video file not found or error loading');
+        // Hide overlay and show message
+        if (overlay) {
+            overlay.innerHTML = `
+                <div class="video-error">
+                    <span style="font-size: 3rem;">🎬</span>
+                    <p style="color: rgba(255,255,255,0.7); margin-top: 15px;">Video not available</p>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">Click "Continue" to proceed</p>
+                </div>
+            `;
+        }
+    });
+}
+
+function playIntroVideo() {
+    const video = document.getElementById('intro-video');
+    const overlay = document.getElementById('video-overlay');
+    
+    if (video) {
+        video.play().then(() => {
+            if (overlay) overlay.classList.add('hidden');
+        }).catch(err => {
+            console.log('Video play error:', err);
+        });
+    }
+}
+
+function skipIntroVideo() {
+    const video = document.getElementById('intro-video');
+    
+    // Pause and reset video
+    if (video) {
+        video.pause();
+        video.currentTime = 0;
+    }
+    
+    soundEngine.play('click');
+    showScreen('instructions');
+}
+
+function continueAfterVideo() {
+    const video = document.getElementById('intro-video');
+    
+    // Pause video when continuing
+    if (video) {
+        video.pause();
+    }
+    
+    soundEngine.play('success');
     showScreen('instructions');
 }
 

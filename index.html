@@ -78,6 +78,44 @@
     </div>
     
     <!-- ============================================ -->
+    <!-- INTRO VIDEO SCREEN -->
+    <!-- ============================================ -->
+    <div id="intro-video-screen" class="screen">
+        <div class="video-screen-container">
+            <div class="video-header">
+                <h2 class="video-title">🎬 The Legend of the Fortress</h2>
+                <p class="video-subtitle">Watch the backstory before your quest begins</p>
+            </div>
+            
+            <div class="video-wrapper">
+                <video id="intro-video" class="intro-video" controls playsinline>
+                    <source src="assets/video/intro.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <!-- Video Overlay (shows when paused/before play) -->
+                <div class="video-overlay" id="video-overlay">
+                    <button class="play-btn" onclick="playIntroVideo()">
+                        <span class="play-icon">▶</span>
+                        <span class="play-text">Play Video</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="video-controls-row">
+                <button class="btn btn-secondary btn-video-skip" onclick="skipIntroVideo()">
+                    ⏭️ Skip Video
+                </button>
+                <button class="btn btn-primary btn-video-continue" id="btn-video-continue" onclick="continueAfterVideo()">
+                    Continue to Instructions →
+                </button>
+            </div>
+            
+            <p class="video-note">💡 You can skip this video and proceed directly to the game</p>
+        </div>
+    </div>
+    
+    <!-- ============================================ -->
     <!-- INSTRUCTIONS SCREEN -->
     <!-- ============================================ -->
     <div id="instructions-screen" class="screen">

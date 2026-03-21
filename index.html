@@ -12,6 +12,9 @@
     
     <!-- Single Combined Stylesheet -->
     <link rel="stylesheet" href="css/game.css">
+    
+    <!-- 3D Hero Animation Effects -->
+    <link rel="stylesheet" href="css/hero-3d-effects.css">
 </head>
 <body>
     <!-- Background Music Audio Element -->
@@ -37,7 +40,86 @@
     <!-- ============================================ -->
     <!-- HOME SCREEN -->
     <!-- ============================================ -->
-    <div id="home-screen" class="screen">
+    <div id="home-screen" class="screen screen-3d">
+        <!-- 3D Animated Hero Background -->
+        <div class="hero-3d-container">
+            <!-- Layer 1: Video Background (replaces static image) -->
+            <video class="hero-video-base" autoplay muted loop playsinline poster="assets/images/hero-banner.png">
+                <source src="assets/video/hero-background.mp4" type="video/mp4">
+                <!-- Fallback: If video doesn't load, the poster image shows -->
+            </video>
+            
+            <!-- Layer 2: Depth Gradient -->
+            <div class="hero-layer-depth"></div>
+            
+            <!-- Layer 3: Moon Glow -->
+            <div class="hero-layer-moonglow"></div>
+            
+            <!-- Layer 4: Light Rays -->
+            <div class="hero-layer-rays">
+                <div class="light-ray"></div>
+                <div class="light-ray"></div>
+                <div class="light-ray"></div>
+                <div class="light-ray"></div>
+                <div class="light-ray"></div>
+            </div>
+            
+            <!-- Layer 5: Floating Orbs -->
+            <div class="hero-layer-orbs">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+                <div class="orb orb-4"></div>
+                <div class="orb orb-5"></div>
+            </div>
+            
+            <!-- Layer 6: Magical Particles -->
+            <div class="hero-layer-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+            
+            <!-- Layer 7: Color Shift Overlay -->
+            <div class="hero-layer-colorshift"></div>
+            
+            <!-- Layer 8: Bottom Mist -->
+            <div class="hero-layer-mist"></div>
+            
+            <!-- Layer 9: Vignette -->
+            <div class="hero-layer-vignette"></div>
+            
+            <!-- Layer 10: Dark Overlay for Readability -->
+            <div class="hero-layer-overlay"></div>
+        </div>
+        
         <div class="screen-center">
             <div class="fortress-icon animate-float">🏰</div>
             <h1 class="game-title">The Fortress of Ed Tech Frameworks</h1>

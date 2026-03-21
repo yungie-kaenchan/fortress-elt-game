@@ -4,129 +4,511 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Fortress of Ed Tech Frameworks</title>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Single Combined Stylesheet -->
-    <link rel="stylesheet" href="css/game.css">
-    
-    <!-- 3D Hero Animation Effects -->
-    <link rel="stylesheet" href="css/hero-3d-effects.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           CSS VARIABLES
+           ============================================ */
+        :root {
+            --color-primary: #8b5cf6;
+            --color-secondary: #ec4899;
+            --color-accent: #fbbf24;
+            --color-success: #10b981;
+            --color-danger: #ef4444;
+            --color-bg-dark: #1e1b4b;
+            --color-bg-darker: #0f0e24;
+            --color-white: #ffffff;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Rajdhani', sans-serif;
+        }
+        
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+            min-height: 100vh;
+            color: var(--color-white);
+            overflow-x: hidden;
+        }
+        
+        /* ============================================
+           SCREEN MANAGEMENT
+           ============================================ */
+        .screen {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        
+        .screen.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ============================================
+           MODAL MANAGEMENT
+           ============================================ */
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: var(--spacing-lg);
+        }
+        
+        .modal.visible {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            max-width: 500px;
+            width: 100%;
+            color: var(--color-bg-dark);
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: #f3f4f6;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background: #e5e7eb;
+        }
+        
+        /* ============================================
+           SCREEN CENTER LAYOUT
+           ============================================ */
+        .screen-center {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .screen-scroll {
+            padding: 40px 20px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+           ============================================ */
+        .fortress-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .game-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(251, 191, 36, 0.3);
+        }
+        
+        .game-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
+        }
+        
+        .screen-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* ============================================
+           FORMS
+           ============================================ */
+        .form-group {
+            margin-bottom: var(--spacing-md);
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .modal-content input {
+            background: #f3f4f6;
+            color: var(--color-bg-dark);
+            border: 2px solid #e5e7eb;
+        }
+        
+        .modal-content input::placeholder {
+            color: #9ca3af;
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 8px 5px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.1rem;
+            font-family: var(--font-body);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: var(--color-white);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-white);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-text-link {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .btn-text-link:hover {
+            color: var(--color-white);
+        }
+        
+        /* ============================================
+           VIDEO SCREEN
+           ============================================ */
+        .video-screen-container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        .video-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .video-subtitle {
+            opacity: 0.7;
+            margin-bottom: 25px;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 20px;
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-placeholder {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .video-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+        
+        .video-controls-row {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           CHARACTERS
+           ============================================ */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .character-option {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            text-align: center;
+        }
+        
+        .character-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .character-option.selected {
+            border-color: var(--color-accent);
+            background: rgba(251, 191, 36, 0.2);
+        }
+        
+        .character-option.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .char-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .char-name {
+            font-size: 0.85rem;
+            display: block;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .game-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            z-index: 5;
+        }
+        
+        .game-footer a {
+            color: var(--color-accent);
+        }
+        
+        /* ============================================
+           VOLUME CONTROL
+           ============================================ */
+        .volume-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 15px;
+            border-radius: 30px;
+            z-index: 100;
+        }
+        
+        .volume-control input[type="range"] {
+            width: 100px;
+            cursor: pointer;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 600px) {
+            .game-title { font-size: 1.8rem; }
+            .members-grid { grid-template-columns: 1fr; }
+            .character-grid { grid-template-columns: repeat(2, 1fr); }
+            .video-controls-row { flex-direction: column; }
+            .btn { width: 100%; margin: 5px 0; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Music Audio Element -->
-    <audio id="bg-music" loop>
-        <source src="assets/audio/adventure-music.mp3" type="audio/mpeg">
-    </audio>
-    
+    <!-- Volume Control -->
+    <div class="volume-control">
+        <span id="volume-icon">🔊</span>
+        <input type="range" id="volume-slider" min="0" max="100" value="30" onchange="adjustVolume(this.value)">
+        <span id="volume-value">30%</span>
+    </div>
+
     <!-- ============================================ -->
     <!-- LOADING SCREEN -->
     <!-- ============================================ -->
     <div id="loading-screen" class="screen active">
         <div class="screen-center">
-            <div class="fortress-icon animate-float">🏰</div>
+            <div class="fortress-icon">🏰</div>
             <h1 class="game-title">The Fortress of Ed Tech Frameworks</h1>
-            <p class="game-subtitle">Master the Five Chambers of Pedagogical Wisdom</p>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
+            <p class="game-subtitle">Preparing your adventure...</p>
+            <div style="margin-top: 30px;">
+                <div style="background: rgba(255,255,255,0.2); border-radius: 10px; height: 8px; width: 200px; margin: 0 auto; overflow: hidden;">
+                    <div id="loading-bar" style="background: linear-gradient(90deg, #fbbf24, #f59e0b); height: 100%; width: 0%; transition: width 0.3s;"></div>
+                </div>
             </div>
-            <p class="loading-text">Preparing your adventure...</p>
         </div>
     </div>
-    
+
     <!-- ============================================ -->
     <!-- HOME SCREEN -->
     <!-- ============================================ -->
-    <div id="home-screen" class="screen screen-3d">
-        <!-- 3D Animated Hero Background -->
-        <div class="hero-3d-container">
-            <!-- Layer 1: Video Background (replaces static image) -->
-            <video id="hero-video" class="hero-video-base" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-banner.png">
-                <source src="assets/video/hero-background.mp4" type="video/mp4">
-                <!-- Fallback: If video doesn't load, the poster image shows -->
-            </video>
-            
-            <!-- Layer 2: Depth Gradient -->
-            <div class="hero-layer-depth"></div>
-            
-            <!-- Layer 3: Moon Glow -->
-            <div class="hero-layer-moonglow"></div>
-            
-            <!-- Layer 4: Light Rays -->
-            <div class="hero-layer-rays">
-                <div class="light-ray"></div>
-                <div class="light-ray"></div>
-                <div class="light-ray"></div>
-                <div class="light-ray"></div>
-                <div class="light-ray"></div>
-            </div>
-            
-            <!-- Layer 5: Floating Orbs -->
-            <div class="hero-layer-orbs">
-                <div class="orb orb-1"></div>
-                <div class="orb orb-2"></div>
-                <div class="orb orb-3"></div>
-                <div class="orb orb-4"></div>
-                <div class="orb orb-5"></div>
-            </div>
-            
-            <!-- Layer 6: Magical Particles -->
-            <div class="hero-layer-particles">
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-                <div class="particle"></div>
-            </div>
-            
-            <!-- Layer 7: Color Shift Overlay -->
-            <div class="hero-layer-colorshift"></div>
-            
-            <!-- Layer 8: Bottom Mist -->
-            <div class="hero-layer-mist"></div>
-            
-            <!-- Layer 9: Vignette -->
-            <div class="hero-layer-vignette"></div>
-            
-            <!-- Layer 10: Dark Overlay for Readability -->
-            <div class="hero-layer-overlay"></div>
-        </div>
-        
+    <div id="home-screen" class="screen">
         <div class="screen-center">
-            <div class="fortress-icon animate-float">🏰</div>
+            <div class="fortress-icon">🏰</div>
             <h1 class="game-title">The Fortress of Ed Tech Frameworks</h1>
             <p class="game-subtitle">Master the Five Chambers of Pedagogical Wisdom</p>
             
-            <div class="card team-form">
-                <h2>⚔️ Register Your Quest Party</h2>
+            <div class="card">
+                <h3>⚔️ Register Your Quest Party</h3>
                 
                 <div class="form-group">
                     <label for="teamName">Team Name</label>
@@ -136,7 +518,7 @@
                 <div class="form-group">
                     <label>Team Members (1-4 warriors)</label>
                     <div class="members-grid">
-                        <input type="text" id="member1" placeholder="Member 1 (required)" maxlength="20">
+                        <input type="text" id="member1" placeholder="Member 1" maxlength="20">
                         <input type="text" id="member2" placeholder="Member 2 (optional)" maxlength="20">
                         <input type="text" id="member3" placeholder="Member 3 (optional)" maxlength="20">
                         <input type="text" id="member4" placeholder="Member 4 (optional)" maxlength="20">
@@ -152,51 +534,42 @@
                 🏆 View Leaderboard
             </button>
             
-            <!-- Admin Login Link -->
-            <div class="admin-login-link">
+            <div style="margin-top: 20px;">
                 <button class="btn-text-link" onclick="showAdminLogin()">🔐 Fortress Keeper</button>
             </div>
         </div>
     </div>
-    
+
     <!-- ============================================ -->
     <!-- INTRO VIDEO SCREEN -->
     <!-- ============================================ -->
     <div id="intro-video-screen" class="screen">
         <div class="video-screen-container">
-            <div class="video-header">
-                <h2 class="video-title">🎬 The Legend of the Fortress</h2>
-                <p class="video-subtitle">Watch the backstory before your quest begins</p>
-            </div>
+            <h2 class="video-title">🎬 The Legend of the Fortress</h2>
+            <p class="video-subtitle">Watch the backstory before your quest begins</p>
             
             <div class="video-wrapper">
                 <video id="intro-video" class="intro-video" controls playsinline>
                     <source src="assets/video/intro.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
                 </video>
-                
-                <!-- Video Overlay (shows when paused/before play) -->
-                <div class="video-overlay" id="video-overlay">
-                    <button class="play-btn" onclick="playIntroVideo()">
-                        <span class="play-icon">▶</span>
-                        <span class="play-text">Play Video</span>
-                    </button>
+                <div class="video-placeholder" id="video-placeholder">
+                    <div class="video-placeholder-icon">🎬</div>
+                    <p>Video will play here</p>
+                    <p style="opacity: 0.5; font-size: 0.9rem;">Click "Play" or skip to continue</p>
                 </div>
             </div>
             
             <div class="video-controls-row">
-                <button class="btn btn-secondary btn-video-skip" onclick="skipIntroVideo()">
+                <button class="btn btn-secondary" onclick="skipIntroVideo()">
                     ⏭️ Skip Video
                 </button>
-                <button class="btn btn-primary btn-video-continue" id="btn-video-continue" onclick="continueAfterVideo()">
+                <button class="btn btn-primary" onclick="continueAfterVideo()">
                     Continue to Instructions →
                 </button>
             </div>
-            
-            <p class="video-note">💡 You can skip this video and proceed directly to the game</p>
         </div>
     </div>
-    
+
     <!-- ============================================ -->
     <!-- INSTRUCTIONS SCREEN -->
     <!-- ============================================ -->
@@ -210,390 +583,374 @@
             </div>
             
             <div class="card">
-                <h3>❤️ Life Powers</h3>
-                <p>Each warrior has <strong>2 Life Powers</strong>. Your team starts with up to <strong>8 total lives</strong>. Wrong answers at the passcode gate cost 1 life. If all lives are lost, your quest ends!</p>
+                <h3>👥 Your Team</h3>
+                <p><strong>Team Name:</strong> <span id="display-team">---</span></p>
+                <p><strong>Members:</strong> <span id="display-members">---</span></p>
+                <p><strong>Total Life Powers:</strong> <span id="display-lives">---</span> ❤️</p>
             </div>
             
             <div class="card">
-                <h3>🛡️ Chamber Aids (3 per level)</h3>
-                <ul class="aids-list">
-                    <li>🎯 <strong>50/50</strong> — Removes 2 wrong answers</li>
-                    <li>📖 <strong>Framework Reference</strong> — View framework details</li>
-                    <li>💡 <strong>Hint</strong> — Get a guiding clue for the level</li>
+                <h3>❤️ Life Powers</h3>
+                <p>Each member contributes 2 Life Powers to the team pool. Wrong answers cost 1 Life Power. If your team runs out of lives, the quest ends!</p>
+            </div>
+            
+            <div class="card">
+                <h3>🛡️ Chamber Aids</h3>
+                <p>Each chamber grants you 3 aids:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>🎯 <strong>50/50</strong> — Remove 2 wrong answers</li>
+                    <li>📖 <strong>Framework Guide</strong> — View framework references</li>
+                    <li>💡 <strong>Hint</strong> — Get a helpful tip</li>
                 </ul>
             </div>
             
-            <div class="card">
-                <h3>🔑 Passcode Gates</h3>
-                <p>After answering 5 questions, enter the passcode from your facilitator. <strong>ALL 5 answers must be correct</strong> to pass!</p>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-primary" onclick="goToCharacterSelect()">
+                    Choose Your Characters →
+                </button>
             </div>
-            
-            <div class="card">
-                <h3>🏆 Victory</h3>
-                <p>Complete all 5 chambers to escape the fortress and earn your Framework Master certificate!</p>
-            </div>
-            
-            <button class="btn btn-primary btn-large" onclick="showCharacterSelection()">
-                ⚔️ Choose Your Warriors!
-            </button>
         </div>
     </div>
-    
+
     <!-- ============================================ -->
-    <!-- CHARACTER SELECTION SCREEN -->
+    <!-- CHARACTER SELECT SCREEN -->
     <!-- ============================================ -->
     <div id="character-screen" class="screen">
         <div class="screen-scroll">
-            <h2 class="screen-title">⚔️ Choose Your Warriors</h2>
-            <p class="screen-subtitle">Each warrior has <strong>2 Life Powers</strong></p>
-            <p class="life-total-display">Total Team Lives: <span id="total-lives-display">0</span></p>
+            <h2 class="screen-title">🦸 Choose Your Characters</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">Each team member selects a unique character</p>
             
             <div id="character-selection-area">
                 <!-- Populated by JavaScript -->
             </div>
             
-            <button id="btn-start-adventure" class="btn btn-primary btn-large" onclick="startAdventure()" disabled>
-                🏰 Enter the Fortress!
-            </button>
+            <div style="text-align: center; margin-top: 25px;">
+                <p style="margin-bottom: 15px;">Total Team Life Powers: <strong id="total-lives-display">0</strong> ❤️</p>
+                <button class="btn btn-primary" id="btn-start-adventure" onclick="startAdventure()" disabled>
+                    Begin the Quest! →
+                </button>
+            </div>
         </div>
     </div>
-    
+
     <!-- ============================================ -->
-    <!-- LEVEL SCREEN -->
+    <!-- LEVEL SCREEN (Placeholder) -->
     <!-- ============================================ -->
     <div id="level-screen" class="screen">
-        <div class="level-container">
-            <!-- Level Header -->
-            <div class="level-header">
-                <div class="level-badge" id="level-badge">Chamber 1</div>
-                <div class="level-title" id="level-title">Framework Identification</div>
-                <div class="question-counter" id="question-counter">Question 1 of 5</div>
-            </div>
-            
-            <!-- Progress Bar -->
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
-            
-            <!-- Navigation Buttons - MOVED TO TOP -->
-            <div class="nav-row nav-row-top">
-                <button id="btn-prev" class="btn btn-secondary btn-nav" onclick="prevQuestion()" style="visibility: hidden;">
-                    ← Previous
-                </button>
-                <button id="btn-next" class="btn btn-primary btn-nav" onclick="nextQuestion()" disabled>
-                    Next Question →
-                </button>
-                <button id="btn-submit" class="btn btn-success btn-nav btn-submit-main" onclick="submitLevel()" style="display: none;">
-                    ✓ Submit All Answers
-                </button>
-            </div>
-            
-            <!-- Aids -->
-            <div class="aids-row" id="aids-row">
-                <!-- Populated by JavaScript -->
-            </div>
-            
-            <!-- Question Area -->
-            <div class="question-area" id="question-area">
-                <!-- Populated by JavaScript -->
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- PASSCODE SCREEN -->
-    <!-- ============================================ -->
-    <div id="passcode-screen" class="screen">
-        <div class="screen-scroll">
-            <div class="key-icon">
-                <img src="assets/images/key-chamber.png" alt="Key Chamber" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <span style="display:none;">🔐</span>
-            </div>
-            <h2 class="screen-title">The Chamber Gate</h2>
-            <p>Review your answers and enter the sacred passcode.</p>
-            
-            <div class="card answers-summary" id="answers-summary">
-                <!-- Populated by JavaScript -->
-            </div>
-            
-            <div class="passcode-input-area">
-                <label for="passcode-input">Enter 5-Digit Passcode:</label>
-                <input type="password" id="passcode-input" maxlength="5" placeholder="•••••" autocomplete="off" inputmode="numeric" pattern="[0-9]*">
-                <button class="btn btn-primary" onclick="checkPasscode()">🔓 Unlock</button>
-            </div>
-            
-            <div id="passcode-error" class="error-box" style="display: none;"></div>
-            
-            <button class="btn btn-secondary" onclick="goBackToLevel()">
-                ← Review Answers
-            </button>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- FEEDBACK REVIEW SCREEN -->
-    <!-- ============================================ -->
-    <div id="feedback-screen" class="screen">
-        <div class="screen-scroll" id="feedback-content">
-            <!-- Populated by JavaScript -->
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- VICTORY SCREEN -->
-    <!-- ============================================ -->
-    <div id="victory-screen" class="screen">
         <div class="screen-center">
-            <div class="victory-crown">
-                <img src="assets/images/crown-gold.png" alt="Victory Crown" onerror="this.classList.add('hidden');">
-                <span class="emoji-fallback">👑</span>
+            <h2 class="screen-title">⚔️ Chamber 1</h2>
+            <div class="card">
+                <h3>🎮 Game Level</h3>
+                <p>If you see this screen, the navigation is working correctly!</p>
+                <p style="margin-top: 15px; color: #4ade80;">✅ All screens load properly.</p>
             </div>
-            <h1 class="victory-title">VICTORY!</h1>
-            <h2>The Fortress of Ed Tech Frameworks Has Fallen!</h2>
-            
-            <div class="card victory-stats">
-                <p>Congratulations, <strong id="victory-team-name"></strong>!</p>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-value" id="victory-time">0:00</div>
-                        <div class="stat-label">Total Time</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value" id="victory-lives">0</div>
-                        <div class="stat-label">Lives Remaining</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="victory-characters" id="victory-characters">
-                <!-- Populated by JavaScript -->
-            </div>
-            
-            <div class="button-group">
-                <button class="btn btn-primary" onclick="downloadCertificate()">📜 Download Certificate</button>
-                <button class="btn btn-secondary" onclick="viewLeaderboard()">🏆 View Leaderboard</button>
-                <button class="btn btn-secondary" onclick="restartGame()">🔄 Play Again</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- GAME OVER SCREEN -->
-    <!-- ============================================ -->
-    <div id="gameover-screen" class="screen">
-        <div class="screen-center gameover-content">
-            <div class="gameover-icon">💀</div>
-            <h1 class="gameover-title">GAME OVER</h1>
-            <p>Your team has lost all Life Powers!</p>
-            <p>The Framework Fortress remains unconquered... for now.</p>
-            
-            <div class="card gameover-stats">
-                <p>Reached: Level <span id="gameover-level">1</span></p>
-                <p>Total Attempts: <span id="gameover-attempts">0</span></p>
-            </div>
-            
-            <button class="btn btn-primary btn-large" onclick="restartGame()">
-                🔄 Try Again
+            <button class="btn btn-secondary" onclick="showScreen('home')">
+                🏠 Back to Home
             </button>
         </div>
     </div>
-    
+
+    <!-- ============================================ -->
+    <!-- ADMIN LOGIN MODAL -->
+    <!-- ============================================ -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAdminLogin()">✕</button>
+            <h2 style="margin-bottom: 20px; text-align: center;">🔐 Fortress Keeper Login</h2>
+            
+            <div class="form-group">
+                <label for="admin-username">Username</label>
+                <input type="text" id="admin-username" placeholder="Enter username">
+            </div>
+            
+            <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" placeholder="Enter password">
+            </div>
+            
+            <div id="admin-login-error" style="color: #ef4444; text-align: center; margin-bottom: 15px; display: none;"></div>
+            
+            <button class="btn btn-primary btn-block" onclick="adminLogin()">
+                🏰 Enter Fortress Keeper
+            </button>
+        </div>
+    </div>
+
     <!-- ============================================ -->
     <!-- LEADERBOARD MODAL -->
     <!-- ============================================ -->
     <div id="leaderboard-modal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>🏆 Hall of Framework Masters</h2>
-                <button class="modal-close" onclick="closeLeaderboard()">✕</button>
-            </div>
-            <div class="modal-body" id="leaderboard-body">
-                <!-- Populated by JavaScript -->
+            <button class="modal-close" onclick="closeLeaderboard()">✕</button>
+            <h2 style="margin-bottom: 20px; text-align: center;">🏆 Leaderboard</h2>
+            <div id="leaderboard-content">
+                <p style="text-align: center; opacity: 0.6;">No teams have completed the quest yet!</p>
             </div>
         </div>
     </div>
-    
-    <!-- ============================================ -->
-    <!-- FRAMEWORK REFERENCE PANEL -->
-    <!-- ============================================ -->
-    <div id="framework-panel" class="side-panel">
-        <div class="panel-header">
-            <h3>📖 Framework Reference</h3>
-            <button class="panel-close" onclick="closeFrameworkPanel()">✕</button>
-        </div>
-        <div class="panel-tabs" id="framework-tabs">
-            <!-- Populated by JavaScript -->
-        </div>
-        <div class="panel-content" id="framework-content">
-            <!-- Populated by JavaScript -->
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- HINT MODAL -->
-    <!-- ============================================ -->
-    <div id="hint-modal" class="modal">
-        <div class="modal-content hint-modal-content">
-            <div class="hint-icon">💡</div>
-            <h3 id="hint-title">Level Hint</h3>
-            <p id="hint-text"></p>
-            <button class="btn btn-primary" onclick="closeHintModal()">Got it!</button>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- CHARACTER DASHBOARD (Fixed Position) -->
-    <!-- ============================================ -->
-    <div id="character-dashboard" class="dashboard">
-        <!-- Populated by JavaScript -->
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- SOUND CONTROLS (Draggable Volume Slider) -->
-    <!-- ============================================ -->
-    <div class="sound-controls" id="sound-controls">
-        <div class="volume-control">
-            <span class="volume-icon" id="volume-icon">🔊</span>
-            <input type="range" id="volume-slider" min="0" max="100" value="30" 
-                   oninput="adjustVolume(this.value)" title="Drag to adjust volume">
-            <span class="volume-value" id="volume-value">30%</span>
-        </div>
-        <button id="btn-sfx" class="sound-btn active" onclick="toggleSFX()" title="Toggle Sound Effects">
-            🔔
-        </button>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- FIREWORKS CONTAINER -->
-    <!-- ============================================ -->
-    <div id="fireworks-container" class="fireworks-container"></div>
-    
-    <!-- ============================================ -->
-    <!-- CONFETTI CONTAINER -->
-    <!-- ============================================ -->
-    <div id="confetti-container" class="confetti-container"></div>
-    
-    <!-- ============================================ -->
-    <!-- ADMIN LOGIN MODAL -->
-    <!-- ============================================ -->
-    <div id="admin-login-modal" class="modal">
-        <div class="modal-content admin-login-modal">
-            <div class="modal-header">
-                <h2>🔐 Fortress Keeper Login</h2>
-                <button class="modal-close" onclick="closeAdminLogin()">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="admin-username">Username</label>
-                    <input type="text" id="admin-username" placeholder="Enter username" autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="admin-password">Password</label>
-                    <input type="password" id="admin-password" placeholder="Enter password" autocomplete="off">
-                </div>
-                <div id="admin-login-error" class="error-text" style="display: none;"></div>
-                <button class="btn btn-primary btn-block" onclick="adminLogin()">🏰 Enter Fortress Keeper</button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- ADMIN PANEL (Fortress Keeper) -->
-    <!-- ============================================ -->
-    <div id="admin-panel-screen" class="screen">
-        <div class="screen-scroll admin-panel-content">
-            <div class="admin-header">
-                <h1>🏰 Fortress Keeper</h1>
-                <p>Admin Dashboard</p>
-                <button class="btn btn-secondary" onclick="logoutAdmin()">🚪 Logout</button>
-            </div>
-            
-            <!-- Analytics Section -->
-            <div class="card admin-section">
-                <h3>📊 Analytics Overview</h3>
-                <div class="analytics-grid" id="analytics-grid">
-                    <!-- Populated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Active Teams Section -->
-            <div class="card admin-section">
-                <h3>🎮 Team Progress</h3>
-                <div id="team-progress-table">
-                    <!-- Populated by JavaScript -->
-                </div>
-            </div>
-            
-            <!-- Leaderboard Management -->
-            <div class="card admin-section">
-                <h3>🏆 Leaderboard Management</h3>
-                <div id="admin-leaderboard">
-                    <!-- Populated by JavaScript -->
-                </div>
-                <div class="admin-actions">
-                    <button class="btn btn-danger" onclick="confirmResetLeaderboard()">🗑️ Reset All Scores</button>
-                    <button class="btn btn-primary" onclick="exportScores()">📥 Export Report (CSV)</button>
-                </div>
-            </div>
-            
-            <!-- Reset Confirmation -->
-            <div id="reset-confirm" class="reset-confirm" style="display: none;">
-                <p>⚠️ Are you sure you want to delete ALL leaderboard data?</p>
-                <p class="warning-text">This action cannot be undone!</p>
-                <div class="button-group">
-                    <button class="btn btn-danger" onclick="resetLeaderboard()">Yes, Delete All</button>
-                    <button class="btn btn-secondary" onclick="cancelReset()">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ============================================ -->
-    <!-- FOOTER -->
-    <!-- ============================================ -->
+
+    <!-- Footer -->
     <footer class="game-footer">
-        <p>Designed and created by <strong>Dr. Payungsak Kaenchan, EdD</strong> | Faculty of Liberal Arts, Mahidol University</p>
-        <p>This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">Creative Commons BY-NC-SA 4.0</a>.</p>
+        <p>Designed by <strong>Dr. Payungsak Kaenchan, EdD</strong> | Faculty of Liberal Arts, Mahidol University</p>
     </footer>
-    
-    <!-- Scripts -->
-    <script src="js/questions.js"></script>
-    <script src="js/game.js"></script>
-    
-    <!-- Hero Video Autoplay Fix -->
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
     <script>
-        // Force video to play when page loads (handles browser autoplay policies)
+        // ============================================
+        // GAME STATE
+        // ============================================
+        const gameState = {
+            teamName: '',
+            members: [],
+            characters: [],
+            totalLifePowers: 0,
+            currentLevel: 1
+        };
+        
+        // Characters data
+        const CHARACTERS = [
+            { id: 'knight', name: 'Knight of Knowledge', emoji: '⚔️', color: '#3b82f6' },
+            { id: 'mage', name: 'Wisdom Mage', emoji: '🧙', color: '#8b5cf6' },
+            { id: 'archer', name: 'Precision Archer', emoji: '🏹', color: '#10b981' },
+            { id: 'healer', name: 'Learning Healer', emoji: '💚', color: '#14b8a6' },
+            { id: 'warrior', name: 'Bold Warrior', emoji: '🛡️', color: '#f59e0b' },
+            { id: 'ranger', name: 'Swift Ranger', emoji: '🌲', color: '#22c55e' },
+            { id: 'paladin', name: 'Noble Paladin', emoji: '✨', color: '#eab308' },
+            { id: 'rogue', name: 'Clever Rogue', emoji: '🗡️', color: '#ef4444' }
+        ];
+        
+        // Admin credentials
+        const ADMIN = { user: 'yungie', pass: 'yung1234' };
+        
+        // ============================================
+        // INITIALIZATION
+        // ============================================
         document.addEventListener('DOMContentLoaded', function() {
-            const heroVideo = document.getElementById('hero-video');
-            if (heroVideo) {
-                // Ensure video is muted (required for autoplay)
-                heroVideo.muted = true;
+            console.log('Page loaded successfully');
+            
+            // Simulate loading
+            let progress = 0;
+            const loadingBar = document.getElementById('loading-bar');
+            const loadingInterval = setInterval(function() {
+                progress += 10;
+                if (loadingBar) loadingBar.style.width = progress + '%';
                 
-                // Try to play the video
-                const playPromise = heroVideo.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(function() {
-                        console.log('Hero video playing successfully');
-                    }).catch(function(error) {
-                        console.log('Video autoplay prevented:', error);
-                        // Add click listener to start video on first interaction
-                        document.body.addEventListener('click', function startVideo() {
-                            heroVideo.play();
-                            document.body.removeEventListener('click', startVideo);
-                        }, { once: true });
-                    });
+                if (progress >= 100) {
+                    clearInterval(loadingInterval);
+                    setTimeout(function() {
+                        showScreen('home');
+                    }, 500);
                 }
-            }
+            }, 150);
         });
         
-        // Also try when window fully loads (for slower connections)
-        window.addEventListener('load', function() {
-            const heroVideo = document.getElementById('hero-video');
-            if (heroVideo && heroVideo.paused) {
-                heroVideo.play().catch(function() {});
+        // ============================================
+        // SCREEN MANAGEMENT
+        // ============================================
+        function showScreen(screenId) {
+            console.log('Navigating to screen:', screenId);
+            
+            // Hide all screens
+            document.querySelectorAll('.screen').forEach(function(s) {
+                s.classList.remove('active');
+            });
+            
+            // Show target screen
+            var targetScreen = document.getElementById(screenId + '-screen');
+            if (targetScreen) {
+                targetScreen.classList.add('active');
+                console.log('Screen activated:', screenId);
+            } else {
+                console.error('Screen not found:', screenId + '-screen');
+                alert('Error: Screen "' + screenId + '" not found!');
             }
-        });
+        }
+        
+        // ============================================
+        // GAME FUNCTIONS
+        // ============================================
+        function startGame() {
+            console.log('startGame() called');
+            
+            var teamName = document.getElementById('teamName').value.trim();
+            var member1 = document.getElementById('member1').value.trim();
+            var member2 = document.getElementById('member2').value.trim();
+            var member3 = document.getElementById('member3').value.trim();
+            var member4 = document.getElementById('member4').value.trim();
+            
+            // Validate
+            if (!teamName) {
+                alert('Please enter a team name!');
+                return;
+            }
+            
+            var members = [member1, member2, member3, member4].filter(function(m) { return m; });
+            
+            if (members.length < 1) {
+                alert('Please enter at least one team member!');
+                return;
+            }
+            
+            // Save to state
+            gameState.teamName = teamName;
+            gameState.members = members;
+            gameState.totalLifePowers = members.length * 2;
+            gameState.characters = [];
+            
+            console.log('Team registered:', teamName, 'with', members.length, 'members');
+            
+            // Navigate to intro video
+            showScreen('intro-video');
+        }
+        
+        function skipIntroVideo() {
+            console.log('Skipping intro video');
+            goToInstructions();
+        }
+        
+        function continueAfterVideo() {
+            console.log('Continuing after video');
+            goToInstructions();
+        }
+        
+        function goToInstructions() {
+            // Update display
+            document.getElementById('display-team').textContent = gameState.teamName;
+            document.getElementById('display-members').textContent = gameState.members.join(', ');
+            document.getElementById('display-lives').textContent = gameState.totalLifePowers;
+            
+            showScreen('instructions');
+        }
+        
+        function goToCharacterSelect() {
+            console.log('Going to character select');
+            renderCharacterSelection();
+            showScreen('character');
+        }
+        
+        function renderCharacterSelection() {
+            var container = document.getElementById('character-selection-area');
+            if (!container) return;
+            
+            var html = '';
+            
+            gameState.members.forEach(function(member, idx) {
+                var selected = gameState.characters[idx] ? gameState.characters[idx].id : null;
+                
+                html += '<div class="card" style="margin-bottom: 20px;">';
+                html += '<h3>🎭 ' + member + '</h3>';
+                html += '<div class="character-grid">';
+                
+                CHARACTERS.forEach(function(char) {
+                    var isSelected = selected === char.id;
+                    var isUsed = gameState.characters.some(function(c, i) {
+                        return i !== idx && c && c.id === char.id;
+                    });
+                    
+                    var classes = 'character-option';
+                    if (isSelected) classes += ' selected';
+                    if (isUsed) classes += ' disabled';
+                    
+                    html += '<div class="' + classes + '" onclick="selectCharacter(' + idx + ', \'' + char.id + '\')">';
+                    html += '<span class="char-emoji">' + char.emoji + '</span>';
+                    html += '<span class="char-name">' + char.name + '</span>';
+                    html += '</div>';
+                });
+                
+                html += '</div></div>';
+            });
+            
+            container.innerHTML = html;
+            
+            // Update lives display
+            document.getElementById('total-lives-display').textContent = gameState.totalLifePowers;
+            
+            // Check if all selected
+            var allSelected = gameState.members.every(function(_, i) {
+                return gameState.characters[i] && gameState.characters[i].id;
+            });
+            document.getElementById('btn-start-adventure').disabled = !allSelected;
+        }
+        
+        function selectCharacter(memberIdx, charId) {
+            // Check if already used by another member
+            var isUsed = gameState.characters.some(function(c, i) {
+                return i !== memberIdx && c && c.id === charId;
+            });
+            
+            if (isUsed) return;
+            
+            var char = CHARACTERS.find(function(c) { return c.id === charId; });
+            
+            gameState.characters[memberIdx] = {
+                id: charId,
+                name: gameState.members[memberIdx],
+                charName: char.name,
+                emoji: char.emoji,
+                lives: 2
+            };
+            
+            console.log('Character selected:', char.name, 'for', gameState.members[memberIdx]);
+            renderCharacterSelection();
+        }
+        
+        function startAdventure() {
+            if (!gameState.members.every(function(_, i) { return gameState.characters[i]; })) {
+                alert('All members must select a character!');
+                return;
+            }
+            
+            console.log('Starting adventure!');
+            showScreen('level');
+        }
+        
+        // ============================================
+        // ADMIN & LEADERBOARD
+        // ============================================
+        function showAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('visible');
+        }
+        
+        function closeAdminLogin() {
+            document.getElementById('admin-login-modal').classList.remove('visible');
+        }
+        
+        function adminLogin() {
+            var username = document.getElementById('admin-username').value.trim();
+            var password = document.getElementById('admin-password').value;
+            
+            if (username === ADMIN.user && password === ADMIN.pass) {
+                closeAdminLogin();
+                alert('Admin access granted! (Admin panel coming soon)');
+            } else {
+                var errorDiv = document.getElementById('admin-login-error');
+                errorDiv.textContent = '❌ Invalid credentials';
+                errorDiv.style.display = 'block';
+            }
+        }
+        
+        function viewLeaderboard() {
+            document.getElementById('leaderboard-modal').classList.add('visible');
+        }
+        
+        function closeLeaderboard() {
+            document.getElementById('leaderboard-modal').classList.remove('visible');
+        }
+        
+        // ============================================
+        // VOLUME CONTROL
+        // ============================================
+        function adjustVolume(value) {
+            var icon = document.getElementById('volume-icon');
+            document.getElementById('volume-value').textContent = value + '%';
+            
+            if (value == 0) icon.textContent = '🔇';
+            else if (value < 30) icon.textContent = '🔈';
+            else if (value < 70) icon.textContent = '🔉';
+            else icon.textContent = '🔊';
+        }
     </script>
 </body>
 </html>

@@ -1590,11 +1590,15 @@ body {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.8);
-    display: flex;
+    display: none;  /* Hidden by default */
     align-items: center;
     justify-content: center;
     z-index: 1000;
     padding: var(--spacing-lg);
+}
+
+.modal.visible {
+    display: flex;  /* Show when .visible class is added */
 }
 
 .modal.hidden {

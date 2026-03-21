@@ -13,7 +13,7 @@
  */
 
 const GAME_CONFIG = {
-    title: "The Framework Fortress",
+    title: "The Fortress of Ed Tech Frameworks",
     subtitle: "Escape the Five Chambers of Teaching Mastery",
     
     // Valid passcodes for each level (any of 5 codes works)
@@ -93,6 +93,8 @@ Students look confused. Some admit they watched at 2x speed. Others fell asleep 
         ],
         correct: "D",
         explanation: "PICRAT diagnoses this as PR (Passive-Replaces): Students are passive receivers, and the video merely replaces the teacher talking — no transformation of practice.",
+        hint: "Think about HOW students are interacting with the technology. Are they active or passive? Does the video change what's possible in learning?",
+        framework: "PICRAT",
         audioFile: "assets/audio/L1-Q1.mp3"
     },
     {
@@ -116,6 +118,8 @@ Teacher Som stares at the screen, confused. She teaches Grade 3 English in Bangk
         ],
         correct: "C",
         explanation: "4Ds diagnoses a failure in D2 (Description): The prompt had no context, learning objective, student level, or topic specification. Good AI fluency requires detailed, well-crafted prompts.",
+        hint: "Look at the prompt the teacher wrote. What information did she FAIL to include? Think about what makes a good AI prompt.",
+        framework: "4Ds",
         audioFile: "assets/audio/L1-Q2.mp3"
     },
     {
@@ -137,6 +141,8 @@ Teacher Nat sighs: "These students just need to try harder. I give everyone the 
         ],
         correct: "B",
         explanation: "UDL diagnoses barriers in Representation (WHAT): The teacher provides only ONE way to access information. UDL principle: Provide multiple means of representation — text, audio, visuals, translations.",
+        hint: "Notice that some students struggle despite being intelligent. Is the problem with THEM or with HOW they can access the content?",
+        framework: "UDL",
         audioFile: "assets/audio/L1-Q3.mp3"
     },
     {
@@ -162,6 +168,8 @@ But after 3 months, students still can't use these words in conversations. They 
         ],
         correct: "A",
         explanation: "Bloom's diagnoses this as stuck at 'Remember' level: see-definition, hear-pronunciation, match-picture, fill-blank are all recall activities. No Analyze, Evaluate, or Create.",
+        hint: "Look at what students DO with the vocabulary. Are they just matching and filling blanks, or are they using words at higher thinking levels?",
+        framework: "Bloom's",
         audioFile: "assets/audio/L1-Q4.mp3"
     }
 ];
@@ -191,6 +199,8 @@ Students are excited — their work has a real global audience!`,
         ],
         correct: "C",
         explanation: "CT (Creative-Transforms): Students CREATE original infographics, and publishing globally for international peer feedback is IMPOSSIBLE without technology. This transforms what's achievable.",
+        hint: "Ask: Are students creating something original? Could this activity happen WITHOUT technology? Think about the global audience aspect.",
+        framework: "PICRAT",
         audioFile: "assets/audio/L2-Q1.mp3"
     },
     {
@@ -214,6 +224,8 @@ Teacher Dao marks the quiz automatically and records scores.`,
         ],
         correct: "A",
         explanation: "Remember: Both watching explanations and answering recall questions (What is the form? Choose correct sentence) are recognition and recall activities. No original application or creation.",
+        hint: "Look at the quiz questions. 'What is the form?' and 'Choose the correct sentence' — what level of thinking do these require?",
+        framework: "Bloom's",
         audioFile: "assets/audio/L2-Q2.mp3"
     },
     {
@@ -237,6 +249,8 @@ All options will be graded using the same rubric: clarity, vocabulary, grammar, 
         ],
         correct: "C",
         explanation: "Action & Expression (HOW): Students demonstrate the SAME learning (describing a process) through DIFFERENT modes (live, video, audio, visual). Same standard, multiple pathways to show mastery.",
+        hint: "Notice students can choose between presentation, video, podcast, or drawing. What does this flexibility address? Is it about content, motivation, or demonstrating learning?",
+        framework: "UDL",
         audioFile: "assets/audio/L2-Q3.mp3"
     },
     {
@@ -263,13 +277,16 @@ The AI generates perfect, grade-appropriate sentences.`,
         ],
         correct: "B",
         explanation: "Description (D2): This prompt includes context (Thai M.2), level (CEFR A2), topic (emotions), specific vocabulary, grammar constraints, relevance requirements, and length limits. Excellent description!",
+        hint: "Look at all the details in the prompt: student level, age, topic, grammar, length. Which 4D dimension is about writing detailed, context-rich prompts?",
+        framework: "4Ds",
         audioFile: "assets/audio/L2-Q4.mp3"
     }
 ];
 
 // ============================================
 // LEVEL 3: DIAGNOSIS
-// Open-ended style but presented as MC for web
+// All options equal length, all use frameworks correctly
+// Distractors misapply frameworks in subtle ways
 // ============================================
 const LEVEL_3_QUESTIONS = [
     {
@@ -287,13 +304,15 @@ Nong Fah is a thoughtful student who needs processing time. After week 3, she st
 Teacher Bee wonders why only "smart" students enjoy Kahoot!`,
         question: "What is WRONG with this activity? Select the BEST diagnosis.",
         options: [
-            { letter: "A", text: "PICRAT: IR (Interactive-Replaces) — students interact but tech just replaces paper quiz; Bloom's: Remember only; UDL: Engagement barrier — timed competition excludes different processors" },
-            { letter: "B", text: "4Ds: Poor Description — teacher didn't write good questions" },
-            { letter: "C", text: "PICRAT: CT (Creative-Transforms) — students are actively competing" },
-            { letter: "D", text: "UDL: Representation barrier — questions are too difficult to read" }
+            { letter: "A", text: "PICRAT: IR (Interactive-Replaces) — clicking replaces hand-raising but same recall function; Bloom's: Stuck at Remember level; UDL: Engagement barrier — timed competition systematically excludes reflective processors" },
+            { letter: "B", text: "Bloom's: Stuck at Remember/Understand — questions test recall only; PICRAT: IA (Interactive-Amplifies) — gamification adds engagement features; UDL: Engagement barrier — repetitive daily use reduces novelty" },
+            { letter: "C", text: "UDL: Representation barrier — fast-moving visual text excludes processing differences; Bloom's: Apply level — students apply grammar rules under pressure; PICRAT: IR — replaces paper quiz format" },
+            { letter: "D", text: "PICRAT: IA (Interactive-Amplifies) — leaderboard amplifies motivation through competition; UDL: Action barrier — only button-clicking as response mode; Bloom's: Understand level — students demonstrate comprehension" }
         ],
         correct: "A",
-        explanation: "Correct diagnosis: PICRAT shows IR (clicking replaces paper); Bloom's shows only Remember; UDL shows Engagement barrier — timed competition systematically excludes slower processors.",
+        explanation: "Best diagnosis: The core problem is Nong Fah stopped trying due to TIME PRESSURE (Engagement barrier), not visual representation or action mode. PICRAT correctly identifies IR (same function). Option B incorrectly claims IA — gamification is surface-level, not amplification. Option C misidentifies as Representation. Option D misidentifies as Action barrier.",
+        hint: "Nong Fah stopped trying because of TIME PRESSURE affecting her motivation, not because she can't see or respond. Which UDL principle addresses motivation and self-regulation?",
+        framework: "Multiple",
         audioFile: "assets/audio/L3-Q1.mp3"
     },
     {
@@ -312,13 +331,15 @@ In class:
 • Teacher grades their pronunciation of the AI-generated dialogue`,
         question: "What is WRONG with this activity? Select the BEST diagnosis.",
         options: [
-            { letter: "A", text: "UDL: Representation barrier — the dialogue is only in text form" },
-            { letter: "B", text: "Bloom's: Analyze level — students are analyzing dialogue structure" },
-            { letter: "C", text: "PICRAT: PR or IR — students READ AI content but don't CREATE; 4Ds: Over-delegated creative element students should do themselves; Bloom's: Only Apply level at best" },
-            { letter: "D", text: "4Ds: Good Description — teacher specified restaurant context clearly" }
+            { letter: "A", text: "UDL: Engagement barrier — students have no ownership of dialogue content; Bloom's: Apply level — students apply pronunciation skills; PICRAT: IA — AI amplifies teacher's material preparation capacity" },
+            { letter: "B", text: "4Ds: Over-delegated — AI wrote the creative content students should produce; PICRAT: PR/IR — students passively consume AI content; Bloom's: Remember/Understand — reading scripts isn't communicating" },
+            { letter: "C", text: "Bloom's: Analyze level — students analyze dialogue patterns through performance; 4Ds: Good Delegation — AI handles routine scripting efficiently; PICRAT: IR — digital script replaces paper script" },
+            { letter: "D", text: "PICRAT: PA (Passive-Amplifies) — AI amplifies content quality beyond teacher ability; UDL: Expression options — students express through oral performance; 4Ds: Appropriate Description — context was specified" }
         ],
-        correct: "C",
-        explanation: "Diagnosis: PICRAT shows PR/IR (students just read AI content); 4Ds shows over-delegation (dialogue creation should be student work); Bloom's shows only Apply (reading aloud), no creation.",
+        correct: "B",
+        explanation: "Best diagnosis: The learning goal is COMMUNICATIVE competence, but students just read scripts. 4Ds identifies over-delegation (dialogue creation IS the learning task). PICRAT shows PR/IR. Option A incorrectly claims IA — AI helping teacher isn't amplification of student learning. Option C wrongly claims Analyze level. Option D wrongly claims PA.",
+        hint: "The lesson claims to be 'communicative' but students only READ a script. Who CREATED the dialogue? What should students be producing to demonstrate communicative competence?",
+        framework: "Multiple",
         audioFile: "assets/audio/L3-Q2.mp3"
     },
     {
@@ -339,13 +360,15 @@ In class:
 But a visitor notices: Students still sit in rows, listen to teacher talk, complete the same exercises, and submit individual work. Nothing about the LEARNING has changed.`,
         question: "What is WRONG with this classroom? Select the BEST diagnosis.",
         options: [
-            { letter: "A", text: "UDL: Missing Engagement — students aren't motivated by digital tools" },
-            { letter: "B", text: "4Ds: Failed Delegation — teacher should use AI to generate worksheets" },
-            { letter: "C", text: "PICRAT: All activities in R (Replaces) column — same function, different medium; no transformation; student roles unchanged — still Passive or low Interactive" },
-            { letter: "D", text: "Bloom's: Activities are at Create level because students use creative tools" }
+            { letter: "A", text: "UDL: Engagement barrier — digital tools without pedagogical change don't motivate; Bloom's: Remember/Understand — exercises test recall; 4Ds: Missing AI integration entirely from the classroom" },
+            { letter: "B", text: "PICRAT: All R (Replaces) column — PDF replaces textbook, Docs replaces paper, same pedagogical function; student roles unchanged from Passive; no Amplification or Transformation of learning" },
+            { letter: "C", text: "Bloom's: Apply/Analyze levels — using digital tools requires new skills; PICRAT: IA column — tablets add accessibility features like zoom and search; UDL: Representation improved through digital formats" },
+            { letter: "D", text: "4Ds: Failed Diligence — teacher didn't iterate on implementation; PICRAT: PA — students passively receive amplified content delivery; UDL: Action improved — typing easier than handwriting" }
         ],
-        correct: "C",
-        explanation: "Diagnosis: PICRAT shows all R column (PDF replaces textbook, Docs replaces paper — same function). No Amplification (new features) or Transformation (new possibilities). Student roles unchanged.",
+        correct: "B",
+        explanation: "Best diagnosis: PICRAT's R-A-T columns directly address this — every substitution is R (Replaces), doing the same thing with different medium. No A (new features used) or T (new possibilities). Option A adds unnecessary 4Ds criticism. Option C wrongly claims IA — search/zoom aren't being used pedagogically. Option D wrongly claims PA.",
+        hint: "The visitor noticed 'nothing about the LEARNING has changed.' Has the FUNCTION changed, or just the MEDIUM? What PICRAT column describes 'same function, different tool'?",
+        framework: "PICRAT",
         audioFile: "assets/audio/L3-Q3.mp3"
     },
     {
@@ -365,207 +388,140 @@ Results:
 • Nong Mild (test anxiety) — freezes under timed pressure, writes only 3 sentences`,
         question: "What is WRONG with this assessment? Select the BEST diagnosis.",
         options: [
-            { letter: "A", text: "Bloom's: The essay topic is at Remember level" },
-            { letter: "B", text: "4Ds: Teacher should have used AI to grade the essays" },
-            { letter: "C", text: "PICRAT: Students aren't using technology to write" },
-            { letter: "D", text: "UDL: Barrier in Action & Expression (HOW) — only one way to demonstrate writing ability; motor barriers, executive function barriers, designed for 'average student' who doesn't exist" }
+            { letter: "A", text: "Bloom's: Remember/Understand only — personal narrative topic doesn't require analysis; PICRAT: Technology absence is the problem — should use word processors; 4Ds: Should allow AI assistance for equity" },
+            { letter: "B", text: "UDL: Engagement barrier — assigned topic doesn't connect to all students' interests; Bloom's: Create level exists — essay writing is creation; 4Ds: Appropriate non-delegation — writing tests shouldn't use AI" },
+            { letter: "C", text: "UDL: Action & Expression barrier — single modality (handwriting) creates motor barriers; single condition (timed) creates executive function barriers; spelling-as-proxy measures wrong construct" },
+            { letter: "D", text: "UDL: Representation barrier — no models or examples of good essays provided; Bloom's: Evaluate level — teacher evaluates student work; PICRAT: Not applicable — no technology is involved here" }
         ],
-        correct: "D",
-        explanation: "Diagnosis: UDL shows Action & Expression barrier — handwriting-only excludes motor difficulties; timed-only excludes anxiety; spelling-penalties exclude those with strong ideas but weak spelling. One format ≠ fair.",
+        correct: "C",
+        explanation: "Best diagnosis: UDL Action & Expression (HOW students demonstrate learning) — three capable students fail because the single assessment FORMAT creates barriers, not the content. Option A wrongly blames Bloom's level. Option B misidentifies as Engagement — the problem isn't topic interest. Option D misidentifies as Representation.",
+        hint: "Three students with RICH IDEAS are failing for different reasons: motor, anxiety, spelling. The problem isn't WHAT they're learning but HOW they must demonstrate it. Which UDL principle addresses output modality?",
+        framework: "UDL",
         audioFile: "assets/audio/L3-Q4.mp3"
     }
 ];
 
 // ============================================
-// LEVEL 4: PRESCRIPTION — "MATCH THE DISASTER"
-// 7 Real-World EdTech Failure Scenarios
-// Design solutions using 2+ frameworks
+// LEVEL 4: PRESCRIPTION
+// All options equal length, all use frameworks correctly
+// Distractors are plausible but miss the core problem
 // ============================================
 const LEVEL_4_QUESTIONS = [
     {
         id: "L4-Q1",
-        title: "The Billion-Dollar iPad Disaster",
-        scenario: `🔥 REAL CASE: Los Angeles Unified School District (2013)
+        title: "Treat the Vocabulary Flashcards",
+        scenario: `Current situation:
 
-The district spent $1.3 BILLION to give every student an iPad loaded with Pearson curriculum software.
+Teacher uses Quizlet flashcards for vocabulary:
+• Students see word → see definition → see image
+• Then: matching quiz, fill-in-the-blank quiz
+• Teacher says "Great app! Very expensive subscription!"
 
-What happened:
-• Students hacked the security within ONE WEEK to access social media and games
-• Teachers received ZERO training on how to use the devices pedagogically
-• The Pearson curriculum was incomplete and buggy
-• iPads sat unused in closets; some were sold on eBay
-• The superintendent resigned; FBI investigated the contract
-• Only $6 million was recovered
+Problem: After 3 months, students can match words to definitions but cannot use the words in their own sentences or conversations. Retention is poor.
 
-The core problem: Leadership asked "How can we get devices to students?" instead of "What will students DO with these devices?"`,
-        question: "Which prescription would have PREVENTED this disaster?",
+Your task: Prescribe a better activity using at least 2 frameworks.`,
+        question: "Which prescription BEST addresses this problem using multiple frameworks?",
         options: [
-            { letter: "A", text: "Buy cheaper tablets and save money on the hardware budget" },
-            { letter: "B", text: "PICRAT First: Design learning activities BEFORE purchasing (What PICRAT cell are we targeting?); then Teacher PD: Extensive training on pedagogical integration; then 4Ds: Train teachers to use AI/tech tools with clear delegation boundaries; then UDL: Ensure curriculum works for ALL learners, not just 'average' students" },
-            { letter: "C", text: "Install stronger security software to prevent student hacking" },
-            { letter: "D", text: "Start with a pilot program of 100 iPads before scaling up" }
+            { letter: "A", text: "Bloom's: Add Analyze — students categorize words by semantic fields and usage contexts; PICRAT: Move to IA — sorting features amplify categorization; UDL: Representation — add audio pronunciation and example sentences" },
+            { letter: "B", text: "Bloom's: Move to Create — students design OWN flashcards with personal sentences; PICRAT: CA/CT — share with partner schools for authentic feedback; UDL: Expression — choose flashcards, recordings, or comics" },
+            { letter: "C", text: "UDL: Engagement — add spaced repetition algorithms for optimal review timing; Bloom's: Apply — use words in controlled sentence frames; PICRAT: IA — adaptive algorithms amplify memorization efficiency" },
+            { letter: "D", text: "4Ds: AI generates personalized vocabulary based on student interests; PICRAT: IT — AI transforms word selection to individual needs; UDL: Engagement — personalization increases relevance and motivation" }
         ],
         correct: "B",
-        explanation: "The LA iPad disaster is a textbook case of technology-first thinking. Option B addresses the ROOT cause: no pedagogical plan. PICRAT forces the question 'What will students DO?' BEFORE purchasing. Teacher PD ensures implementation. 4Ds guides AI/tech use. UDL ensures accessibility. Technology + No Pedagogical Plan = Expensive Paperweight.",
+        explanation: "The problem is students can't USE words productively. Option B directly addresses this: Bloom's Create (students produce original content), PICRAT CA/CT (authentic audience transforms purpose), UDL Expression (multiple creation modes). Option A stays at Analyze — still receptive. Option C improves memorization but doesn't address production. Option D personalizes input but not output.",
+        hint: "Students can MATCH but can't USE. Which prescription moves from RECEIVING vocabulary to PRODUCING with it? Look for Create level + authentic audience + production.",
+        framework: "Multiple",
         audioFile: "assets/audio/L4-Q1.mp3"
     },
     {
         id: "L4-Q2",
-        title: "The Interactive Whiteboard Graveyard",
-        scenario: `A school spent ฿2.5 million installing interactive whiteboards (IWBs) in every classroom.
+        title: "Treat the AI Writing Assignment",
+        scenario: `Current situation:
 
-Two years later, a consultant visits and observes:
-• 80% of teachers use the IWB ONLY as a projector screen for PowerPoint
-• The interactive features (touch, annotation, games) are never used
-• Some boards have "Do Not Touch" signs posted by teachers
-• Students sit passively watching slides — same as before the IWBs
-• The school proudly shows the IWBs to parents on Open House day
-• Teachers say: "I don't have time to learn all those features"
+Teacher's assignment: "Use ChatGPT to help you write a 200-word essay about your favorite holiday."
 
-The expensive technology changed NOTHING about how students learn.`,
-        question: "Which prescription BEST transforms this situation?",
+Results:
+• Many students copy-paste AI output directly
+• Essays are well-written but sound identical
+• Teacher can't tell who actually learned anything
+• Students who wrote honestly feel cheated
+
+Your task: Prescribe a better assignment using at least 2 frameworks.`,
+        question: "Which prescription BEST addresses this problem using multiple frameworks?",
         options: [
-            { letter: "A", text: "Replace teachers who refuse to use technology with younger, tech-savvy teachers" },
-            { letter: "B", text: "Create a rule requiring teachers to use at least 3 IWB features per lesson" },
-            { letter: "C", text: "PICRAT Diagnosis: Current use = PR (Passive-Replaces) — no change in practice; Prescription: Move to IA/IT minimum → Design activities where STUDENTS touch the board (sorting, matching, annotation); Bloom's Progression: Use IWB for Apply/Analyze activities, not just Remember; UDL (HOW): Students demonstrate learning BY USING the board (kinesthetic expression); Teacher Support: Peer coaching, not just one-time training" },
-            { letter: "D", text: "Add gamification apps like Kahoot! to make the IWB more fun" }
+            { letter: "A", text: "4Ds: Define delegation boundaries — AI for brainstorming/grammar, student for content/voice; require process portfolio; UDL: Expression options — essay, video, photo story; Bloom's: Add metacognitive reflection" },
+            { letter: "B", text: "Bloom's: Move to Evaluate — students critique AI essays for authenticity and voice; PICRAT: IA — interact with AI as analytical tool; 4Ds: Strengthen Discernment — teach identifying AI patterns" },
+            { letter: "C", text: "4Ds: Strengthen Description — teach effective prompt engineering for quality output; PICRAT: CA — students create prompts and curate responses; Bloom's: Analyze — examine prompt-output relationships" },
+            { letter: "D", text: "UDL: Engagement — student choice of topic increases intrinsic motivation to write authentically; Bloom's: Create — essay writing is creation; PICRAT: CT — AI transforms the revision process" }
         ],
-        correct: "C",
-        explanation: "Option C diagnoses the problem using PICRAT (stuck at PR), then prescribes movement toward Interactive-Transforms. Bloom's ensures higher-order use. UDL adds expression options. The key insight: the technology isn't the problem — the PEDAGOGY is. Shiny New Tool + Same Old Teaching = Digital Worksheet.",
+        correct: "A",
+        explanation: "The problem is students SUBSTITUTING AI for their own work. Option A directly addresses this: 4Ds delegation boundaries define human vs. AI roles, process portfolio proves human work, UDL offers alternatives, Bloom's adds metacognition. Option B teaches critique but doesn't ensure student writing. Option C improves AI use but doesn't ensure learning. Option D assumes topic choice prevents copying.",
+        hint: "Students are SUBSTITUTING AI output for their own writing. Which prescription clearly defines what AI CAN help vs. what students MUST do themselves, with evidence?",
+        framework: "Multiple",
         audioFile: "assets/audio/L4-Q2.mp3"
     },
     {
         id: "L4-Q3",
-        title: "The Copy-Paste Catastrophe",
-        scenario: `Teacher Suda excitedly introduces ChatGPT to her M.4 English class:
+        title: "Treat the Grammar Video",
+        scenario: `Current situation:
 
-Assignment: "Use ChatGPT to help you write a 300-word essay about climate change."
+Teacher records a 20-minute video explaining present continuous tense:
+• Teacher talks to camera explaining rules
+• Shows examples on whiteboard
+• Students watch at home, take notes
+• In class: complete workbook exercises (fill-in-the-blank)
 
-Results after grading:
-• 28 out of 32 students submitted nearly IDENTICAL essays
-• Perfect grammar, sophisticated vocabulary — but zero personal voice
-• When asked follow-up questions, students couldn't explain their own essays
-• Students who wrote honestly felt cheated and demotivated
-• One student proudly said: "I finished in 2 minutes! AI is amazing!"
-• Teacher Suda now wants to BAN all AI tools
+Problems:
+• Students zone out during long explanation
+• No way to check understanding during video
+• Class time spent on low-level exercises
+• Students can recite rules but can't use them naturally
 
-The AI did the learning. The students did the clicking.`,
-        question: "Which prescription BEST addresses this AI integration failure?",
+Your task: Prescribe a better design using at least 2 frameworks.`,
+        question: "Which prescription BEST addresses this problem using multiple frameworks?",
         options: [
-            { letter: "A", text: "Use AI detection software (GPTZero, Turnitin) to catch cheaters and give them zero marks" },
-            { letter: "B", text: "4Ds Framework — D1 (Delegation): Explicitly define what AI CAN do (brainstorm ideas, check grammar, suggest vocabulary) vs. what STUDENTS MUST do (personal stories, opinions, evidence from their life); D3 (Discernment): Require students to evaluate and edit AI suggestions; D4 (Diligence): Mandatory process portfolio showing drafts, revisions, AI prompts used; Bloom's: Add Evaluate level — students critique AI output before using it; UDL (HOW): Options for final product — written essay, video diary, podcast, infographic" },
-            { letter: "C", text: "Ban ChatGPT completely and return to handwritten essays with no technology" },
-            { letter: "D", text: "Change the topic to something more personal that AI can't write about" }
+            { letter: "A", text: "UDL: Representation — chunk into 5-min segments with captions and subtitles; Engagement — add self-check after each chunk; Bloom's: Move to Understand — comprehension checks during video" },
+            { letter: "B", text: "PICRAT: Embedded quizzes move PA→IA; student-created videos move to CA/CT; UDL: Representation (video+transcript+diagrams) AND Engagement (relevant contexts); Bloom's: Progress Remember→Apply→Create" },
+            { letter: "C", text: "4Ds: AI generates adaptive practice matching each student's error patterns; PICRAT: IT — AI transforms practice through personalization; Bloom's: Analyze — students examine their own grammar mistakes" },
+            { letter: "D", text: "Bloom's: Skip to Create — inductive discovery replaces explicit instruction; PICRAT: CT — student-led inquiry transforms learning; UDL: Expression — students explain grammar in their own words" }
         ],
         correct: "B",
-        explanation: "Option B works WITH AI, not against it. The 4Ds framework (especially D1-Delegation) establishes clear human-AI boundaries. D3/D4 require critical engagement. Bloom's adds evaluation of AI output. UDL provides expression options. The key: AI + Copy-Paste Mindset = Outsourced Thinking. But AI + Clear Boundaries + Critical Thinking = Amplified Learning.",
+        explanation: "Multiple problems require comprehensive solution. Option B addresses ALL: PICRAT progression (PA→IA→CA/CT), UDL Representation AND Engagement, Bloom's cognitive progression to Create. Option A improves video but stays at Understand — doesn't reach application/creation. Option C adds AI but doesn't fix the video or reach Create. Option D skips scaffolding entirely.",
+        hint: "FOUR problems: too long, passive, no checks, can't apply. Which prescription addresses ALL of these with a coherent progression from passive viewing to active creation?",
+        framework: "Multiple",
         audioFile: "assets/audio/L4-Q3.mp3"
     },
     {
         id: "L4-Q4",
-        title: "The Kahoot! Addiction",
-        scenario: `Teacher Somchai uses Kahoot! in EVERY English lesson. Students love it!
+        title: "Treat the Reading Comprehension",
+        scenario: `Current situation:
 
-Observations over one semester:
-• Students get excited, competitive, and highly engaged
-• The classroom is loud, energetic, and "fun"
-• Students memorize answers to win points but forget them the next day
-• Grammar quiz scores improved, but speaking/writing skills declined
-• Students now complain when ANY activity isn't a game
-• One student said: "Why do we have to write? Just make it a Kahoot!"
-• Teacher proudly reports: "My students are so engaged!"
+Teacher's reading lesson for Matthayom 3:
+• All students read the same 2-page article about climate change
+• Format: printed text only, same font size throughout
+• Task: Answer 10 comprehension questions individually
+• Time: 30 minutes for all students
+• Assessment: Count correct answers out of 10
 
-High engagement. Low learning. Students became addicted to the dopamine, not the content.`,
-        question: "Which prescription BEST rebalances this classroom?",
+Problems:
+• Nong Ploy (dyslexic) struggles to decode the dense text
+• Nong Bank (advanced reader) finishes in 10 minutes, bored
+• Nong Fern (visual learner) can't picture the concepts described
+• Most students answer surface-level questions correctly but can't discuss the article's argument
+
+Your task: Prescribe a better design using at least 2 frameworks.`,
+        question: "Which prescription BEST addresses this problem using multiple frameworks?",
         options: [
-            { letter: "A", text: "Limit Kahoot! to once per week and add more writing assignments" },
-            { letter: "B", text: "Bloom's Audit: Current activities stuck at Remember level (recall facts for points); Prescription: Design Kahoot! for higher levels — Analyze (categorize examples), Evaluate (judge best answers); PICRAT Check: Current = IR (Interactive-Replaces quiz); Move to IA/IT — Kahoot! as formative assessment that CHANGES instruction; UDL (WHY): Diversify engagement strategies — not just competition, add collaboration, choice, relevance; 4Ds: Use AI to generate varied question types beyond simple recall" },
-            { letter: "C", text: "Replace Kahoot! with Quizizz or Blooket for variety" },
-            { letter: "D", text: "Add prizes and bigger rewards to motivate students even more" }
+            { letter: "A", text: "UDL: Representation — text + audio + infographic versions address input diversity; Engagement — topic choices within theme; Bloom's: Add Analyze/Evaluate questions; PICRAT: IA — multimedia interaction" },
+            { letter: "B", text: "Bloom's: Ensure Remember/Understand mastery before higher levels; PICRAT: PA — provide multiple passive format options; 4Ds: AI simplifies text for struggling readers; UDL: Representation — leveled texts" },
+            { letter: "C", text: "UDL: Action & Expression — choose essay, diagram, or presentation to show understanding; Bloom's: Evaluate — judge article credibility; PICRAT: CT — collaborative annotation transforms reading" },
+            { letter: "D", text: "4Ds: AI generates differentiated questions for each reading level; PICRAT: IT — personalized assessment transforms evaluation; UDL: Engagement — self-paced completion reduces anxiety" }
         ],
-        correct: "B",
-        explanation: "Option B doesn't abandon Kahoot! but TRANSFORMS its use. Bloom's moves beyond Remember. PICRAT shifts from Replace to Amplify/Transform. UDL diversifies engagement beyond competition. The key insight: Student Engagement ≠ Student Learning. High scores on games don't mean deep understanding.",
+        correct: "A",
+        explanation: "Four students struggle for different INPUT and DEPTH reasons. Option A addresses both: UDL Representation solves Ploy (audio), Fern (infographic), Bank (engagement/choice); Bloom's higher questions address surface-level problem. Option B stays low-level. Option C addresses output but not input barriers. Option D personalizes assessment but not instruction.",
+        hint: "Four problems: decoding difficulty, boredom, visual needs, surface-level thinking. Which prescription addresses BOTH the input barrier AND the cognitive level problem?",
+        framework: "Multiple",
         audioFile: "assets/audio/L4-Q4.mp3"
-    },
-    {
-        id: "L4-Q5",
-        title: "The Language Lab Ghost Town",
-        scenario: `A school invested ฿5 million in a state-of-the-art language laboratory:
-• 40 computers with headsets and microphones
-• Licensed pronunciation software
-• Recording and playback capabilities
-• Teacher control console
-
-Five years later:
-• Only 8 computers still work; the rest have viruses or broken headsets
-• No IT staff trained to maintain the equipment
-• Teachers use the room for "free computer time" — students play games
-• The pronunciation software license expired 3 years ago; no one renewed it
-• The room is now nicknamed "The Ghost Lab" — students avoid it
-• Original training teachers have all transferred to other schools
-
-The investment died not from lack of technology, but lack of sustainability planning.`,
-        question: "If you could go back in time, which prescription would SAVE this investment?",
-        options: [
-            { letter: "A", text: "Buy higher-quality computers that last longer without breaking" },
-            { letter: "B", text: "Hire a full-time IT technician dedicated to the language lab" },
-            { letter: "C", text: "PICRAT Design: Before purchase, define target cells (IA: pronunciation practice with feedback; CA: student-created audio projects); Teacher Sustainability: Train multiple teachers + document procedures + annual refresher; Budget Planning: Include 5-year maintenance, software renewal, hardware replacement in ORIGINAL budget; UDL Integration: Design activities using the lab for multiple purposes (listening, speaking, recording portfolios); Assessment Alignment: Connect lab activities to course grades so usage is mandatory, not optional" },
-            { letter: "D", text: "Make language lab time a compulsory 2 hours per week for all classes" }
-        ],
-        correct: "C",
-        explanation: "Option C addresses the SYSTEMIC failure. PICRAT ensures pedagogical purpose. Teacher training creates sustainability. Budget planning prevents abandonment. UDL maximizes utility. Assessment alignment ensures usage. The equation: More Devices + Less Training + Zero Maintenance Budget = Expensive Ghost Town.",
-        audioFile: "assets/audio/L4-Q5.mp3"
-    },
-    {
-        id: "L4-Q6",
-        title: "The One-Device Classroom War",
-        scenario: `Teacher Nida has ONE tablet for her class of 45 students.
-
-Her current approach:
-• Teacher holds the tablet and shows videos to the whole class
-• Sometimes a "good student" is allowed to touch the tablet as a reward
-• Other students crowd around trying to see the small screen
-• Students in the back say they can't see or hear properly
-• Arguments break out over whose turn it is to hold the tablet
-• Teacher says: "At least we have SOME technology!"
-
-One device. 45 students. Zero equity. Maximum frustration.`,
-        question: "Which prescription MAXIMIZES learning with this limited resource?",
-        options: [
-            { letter: "A", text: "Request funding for more tablets — one device isn't enough for real integration" },
-            { letter: "B", text: "UDL (WHAT — Representation): Use tablet to PROJECT onto wall/screen so ALL students can see; (WHY — Engagement): Rotate device responsibility fairly with clear schedule; (HOW — Expression): BYOD option — students can use their own phones for parallel activities; PICRAT Station Rotation: Create 4 stations — 1 tablet station (small group), 3 non-tech stations (role-play, writing, peer practice); students rotate every 15 minutes; Bloom's Differentiation: Tablet station for Create/Analyze activities; other stations for Apply/Practice; 4Ds: Students research on phones, curate findings on class tablet" },
-            { letter: "C", text: "Only use the tablet for teacher demonstration; don't let students touch it" },
-            { letter: "D", text: "Designate the tablet for the lowest-performing students as intervention support" }
-        ],
-        correct: "B",
-        explanation: "Option B maximizes a limited resource through smart design. UDL ensures access for all. Station rotation gives everyone meaningful tablet time. BYOD leverages existing devices. Bloom's ensures the tablet is used for higher-order tasks. The principle: 1 Device ÷ Smart Design = Learning for 45. It's not about the quantity of devices — it's about the quality of the design.",
-        audioFile: "assets/audio/L4-Q6.mp3"
-    },
-    {
-        id: "L4-Q7",
-        title: "The Zoom Zombie Apocalypse",
-        scenario: `During emergency remote teaching, Teacher Pranee conducts English classes via Zoom:
-
-Every lesson looks the same:
-• Teacher talks for 45 minutes with slides shared on screen
-• Students have cameras OFF (required by school policy to save bandwidth)
-• Teacher asks "Any questions?" — silence
-• Chat box empty except for attendance replies
-• Teacher can't tell if students are listening, sleeping, or playing games
-• Assignment submission rate: 30%
-• Teacher says: "I'm exhausted. I'm teaching to black boxes."
-
-When students returned to school, they had learned almost nothing from 4 months online.`,
-        question: "Which prescription would have RESURRECTED this dead Zoom classroom?",
-        options: [
-            { letter: "A", text: "Require all students to turn cameras ON so teacher can monitor attention" },
-            { letter: "B", text: "Record all lessons so students can re-watch later if they missed something" },
-            { letter: "C", text: "PICRAT Redesign: Break 45-min lecture into 10-min chunks with INTERACTION: polls, chat responses, breakout rooms; Move from PA → IA minimum: Students respond every 5-7 minutes; Bloom's Chunking: Each chunk targets one level — mini-lecture (Understand), poll (Apply), breakout (Analyze), share-back (Evaluate); UDL (WHAT): Lesson recording + transcript + visual summary; (WHY): Vary activities to maintain attention — chat, voice, movement breaks; (HOW): Multiple ways to participate — chat, emoji reactions, Padlet, voice; 4Ds: Use AI to summarize discussions, generate follow-up questions" },
-            { letter: "D", text: "Shorten lessons to 30 minutes since students can't focus online" }
-        ],
-        correct: "C",
-        explanation: "Option C transforms passive Zoom into interactive online learning. PICRAT moves from PA to IA through frequent interaction. Bloom's structures content into cognitive chunks. UDL provides multiple access points and participation modes. The key: 45-Minute Lecture + Black Boxes = Zero Learning. But Chunked Content + Frequent Interaction + Multiple Modalities = Engaged Remote Learners.",
-        audioFile: "assets/audio/L4-Q7.mp3"
     }
 ];
 
@@ -606,6 +562,8 @@ const LEVEL_5_QUESTIONS = [
                 explanation: "FALSE: UDL means making learning ACCESSIBLE, not easier. Same high standards, multiple pathways to demonstrate mastery."
             }
         ],
+        hint: "Read each statement carefully. Think about whether the claim is absolute ('ALWAYS', 'NEVER') or nuanced. Frameworks usually have nuanced applications.",
+        framework: "Multiple",
         audioFile: "assets/audio/L5-Q1.mp3"
     },
     {
@@ -646,6 +604,8 @@ You need to analyze this lesson and suggest improvements.`,
                 explanation: "B integrates: PICRAT transformation (AI chatbot = IT); UDL (multiple expression); Bloom's (Create level with real audience). Comprehensive improvement."
             }
         ],
+        hint: "For Part A: Trace each activity through PICRAT. Watching = P; Worksheets without tech = P or low I; Writing sentences = C; Listening to answers = P. For Part B: Look for transformation, not just technology addition.",
+        framework: "PICRAT",
         audioFile: "assets/audio/L5-Q2.mp3"
     },
     {
@@ -687,6 +647,8 @@ The teacher calls this "innovative speaking practice."`,
                 explanation: "C uses AI as a MODEL, not a replacement. Students compare their own speaking to the AI, identify gaps, and set goals. AI becomes a learning tool, not a substitute."
             }
         ],
+        hint: "The teacher grades AI-generated pronunciation, not student pronunciation. What is actually being assessed? For improvement, think: How can AI become a MODEL for comparison rather than a replacement?",
+        framework: "Multiple",
         audioFile: "assets/audio/L5-Q3.mp3"
     },
     {
@@ -721,6 +683,8 @@ The teacher calls this "innovative speaking practice."`,
                 explanation: "TRUE: Students are passive receivers (watching), but technology Amplifies with features impossible without it (captions, speed control, transcript)."
             }
         ],
+        hint: "For each statement, think about the EXACT framework definition. Kahoot clicking = Interactive? UDL = lowering standards? AI without review = good fluency? Video with controls = Amplifies?",
+        framework: "Multiple",
         audioFile: "assets/audio/L5-Q4.mp3"
     },
     {
@@ -748,6 +712,8 @@ Teacher Nok can make ONE change to her lesson. Resources are limited.`,
         ],
         correct: "B",
         explanation: "B addresses Representation (WHAT) — multiple formats help both dyslexic learner (audio/TTS) and auditory learner (audio). One change, maximum barrier reduction.",
+        hint: "Both students are intelligent but failing. One has dyslexia (text issues), one is auditory (needs to hear). What ONE change helps BOTH? Think UDL Representation.",
+        framework: "UDL",
         audioFile: "assets/audio/L5-Q5.mp3"
     }
 ];

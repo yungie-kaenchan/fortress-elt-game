@@ -8,14 +8,13 @@
    3D HERO CONTAINER
    ============================================ */
 .hero-3d-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 1;
-    pointer-events: none; /* Allow clicks to pass through to content */
+    z-index: 0;
 }
 
 /* Base Layer - Video Background with Breathing Effect */
@@ -421,28 +420,11 @@
    ============================================ */
 #home-screen.screen-3d {
     background: transparent !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    z-index: 5; /* Higher than hero-3d-container (z-index: 1) */
 }
 
-/* Make the screen-center overlay on top of video */
 #home-screen .screen-center {
     position: relative;
-    z-index: 100; /* Well above all video layers */
-    background: transparent;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    z-index: 20;
 }
 
 /* Optional: Mouse-tracking subtle effect (add JS to enable) */

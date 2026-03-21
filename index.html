@@ -44,7 +44,7 @@
         <!-- 3D Animated Hero Background -->
         <div class="hero-3d-container">
             <!-- Layer 1: Video Background (replaces static image) -->
-            <video class="hero-video-base" autoplay muted loop playsinline poster="assets/images/hero-banner.png">
+            <video id="hero-video" class="hero-video-base" autoplay muted loop playsinline preload="auto" poster="assets/images/hero-banner.png">
                 <source src="assets/video/hero-background.mp4" type="video/mp4">
                 <!-- Fallback: If video doesn't load, the poster image shows -->
             </video>
@@ -559,5 +559,41 @@
     <!-- Scripts -->
     <script src="js/questions.js"></script>
     <script src="js/game.js"></script>
+    
+    <!-- Hero Video Autoplay Fix -->
+    <script>
+        // Force video to play when page loads (handles browser autoplay policies)
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroVideo = document.getElementById('hero-video');
+            if (heroVideo) {
+                // Ensure video is muted (required for autoplay)
+                heroVideo.muted = true;
+                
+                // Try to play the video
+                const playPromise = heroVideo.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        console.log('Hero video playing successfully');
+                    }).catch(function(error) {
+                        console.log('Video autoplay prevented:', error);
+                        // Add click listener to start video on first interaction
+                        document.body.addEventListener('click', function startVideo() {
+                            heroVideo.play();
+                            document.body.removeEventListener('click', startVideo);
+                        }, { once: true });
+                    });
+                }
+            }
+        });
+        
+        // Also try when window fully loads (for slower connections)
+        window.addEventListener('load', function() {
+            const heroVideo = document.getElementById('hero-video');
+            if (heroVideo && heroVideo.paused) {
+                heroVideo.play().catch(function() {});
+            }
+        });
+    </script>
 </body>
 </html>
